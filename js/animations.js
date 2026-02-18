@@ -1,453 +1,432 @@
-// Enhanced Animations with Intersection Observer
+// Enhanced Animations with Intersection Observer - Version 2.0
 
-document.addEventListener('DOMContentLoaded', function() {
-    initScrollAnimations();
-    initParallaxEffects();
-    initAnimateOnScrollElements();
+/**
+ * Animation system using Intersection Observer API
+ * Provides scroll-triggered animations with performance optimization
+ */
+
+class ScrollAnimations {
+    constructor() {
+        this.observers = new Map();
+        this.animatedElements = new Set();
+        this.config = {
+            default: {
+                threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
+                rootMargin: '0px 0px -50px 0px'
+            },
+            entrance: {
+                threshold: 0.1,
+                rootMargin: '0px 0px -10% 0px'
+            },
+            parallax: {
+                threshold: 0,
+                rootMargin: '0px'
+            },
+            counter: {
+                threshold: 0.5,
+                rootMargin: '0px 0px -20% 0px'
+            }
+        };
+        
+        this.init();
+    }
+
+    init() {
+        if (!window.IntersectionObserver) {
+            console.warn('IntersectionObserver not supported, falling back to scroll events');
+            this.initFallback();
+            return;
+        }
+
+        this.setupObservers();
+        this.observeElements();
+        this.initSpecialAnimations();
+        
+        console.log('✅ Enhanced scroll animations initialized');
+    }
+
+    setupObservers() {
+        // Main entrance animations observer
+        this.observers.set('entrance', new IntersectionObserver(
+            this.handleEntranceAnimations.bind(this),
+            this.config.entrance
+        ));
+
+        // Parallax effects observer
+        this.observers.set('parallax', new IntersectionObserver(
+            this.handleParallaxAnimations.bind(this),
+            this.config.parallax
+        ));
+
+        // Counter animations observer
+        this.observers.set('counter', new IntersectionObserver(
+            this.handleCounterAnimations.bind(this),
+            this.config.counter
+        ));
+
+        // Progress bars observer
+        this.observers.set('progress', new IntersectionObserver(
+            this.handleProgressAnimations.bind(this),
+            this.config.entrance
+        ));
+    }
+
+    observeElements() {
+        // Observe entrance animation elements
+        const entranceElements = document.querySelectorAll([
+            '.animate-on-scroll',
+            '.glass-card:not(.hero .glass-card)',
+            '.section-title',
+            '.project-card',
+            '.contact-info',
+            '.contact-form',
+            '.skill-tag',
+            '.project-link'
+        ].join(', '));
+
+        entranceElements.forEach((element, index) => {
+            element.dataset.animationIndex = index;
+            this.observers.get('entrance').observe(element);
+        });
+
+        // Observe parallax elements
+        const parallaxElements = document.querySelectorAll([
+            '.parallax-element',
+            '.floating-shapes',
+            '.shape',
+            '.hero-background'
+        ].join(', '));
+
+        parallaxElements.forEach(element => {
+            this.observers.get('parallax').observe(element);
+        });
+
+        // Observe counter elements
+        const counterElements = document.querySelectorAll('[data-counter]');
+        counterElements.forEach(element => {
+            this.observers.get('counter').observe(element);
+        });
+
+        // Observe progress elements
+        const progressElements = document.querySelectorAll('.progress-bar, .skill-progress');
+        progressElements.forEach(element => {
+            this.observers.get('progress').observe(element);
+        });
+    }
+
+    handleEntranceAnimations(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !this.animatedElements.has(entry.target)) {
+                this.animateEntrance(entry.target);
+                this.animatedElements.add(entry.target);
+            }
+        });
+    }
+
+    animateEntrance(element) {
+        const animationType = this.getAnimationType(element);
+        const delay = this.calculateDelay(element);
+        
+        // Add base animation class
+        element.classList.add('animate-entrance');
+        
+        // Apply specific animation with delay
+        setTimeout(() => {
+            element.classList.add(animationType);
+            element.style.animationDelay = `${delay}ms`;
+            
+            // Trigger custom events for other modules
+            element.dispatchEvent(new CustomEvent('elementAnimated', {
+                detail: { type: animationType, delay }
+            }));
+        }, 50);
+    }
+
+    getAnimationType(element) {
+        // Determine animation based on element type and position
+        if (element.classList.contains('section-title')) {
+            return 'fadeInDown';
+        }
+        
+        if (element.classList.contains('project-card')) {
+            return 'scaleIn';
+        }
+        
+        if (element.classList.contains('contact-info')) {
+            return 'fadeInLeft';
+        }
+        
+        if (element.classList.contains('contact-form')) {
+            return 'fadeInRight';
+        }
+        
+        if (element.classList.contains('skill-tag')) {
+            return 'bounceIn';
+        }
+
+        if (element.classList.contains('glass-card')) {
+            return 'glassReveal';
+        }
+        
+        // Default animation
+        return 'fadeInUp';
+    }
+
+    calculateDelay(element) {
+        const baseDelay = 0;
+        const staggerDelay = 100;
+        
+        // Staggered animation for grid items
+        if (element.closest('.projects-grid, .skills-preview')) {
+            const parent = element.closest('.projects-grid, .skills-preview');
+            const siblings = Array.from(parent.children);
+            const index = siblings.indexOf(element);
+            return index * staggerDelay;
+        }
+        
+        // Animation index from dataset
+        if (element.dataset.animationIndex) {
+            return parseInt(element.dataset.animationIndex) * 50;
+        }
+        
+        return baseDelay;
+    }
+
+    handleParallaxAnimations(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                this.updateParallax(entry.target, entry.intersectionRatio);
+            }
+        });
+    }
+
+    updateParallax(element, intersectionRatio) {
+        if (element.classList.contains('shape')) {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            const rotation = scrolled * 0.1;
+            
+            element.style.transform = `translate3d(0, ${rate}px, 0) rotate(${rotation}deg)`;
+        }
+        
+        if (element.classList.contains('hero-background')) {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.3;
+            element.style.transform = `translate3d(0, ${rate}px, 0)`;
+        }
+    }
+
+    handleCounterAnimations(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !this.animatedElements.has(entry.target)) {
+                this.animateCounter(entry.target);
+                this.animatedElements.add(entry.target);
+            }
+        });
+    }
+
+    animateCounter(element) {
+        const finalValue = parseInt(element.dataset.counter);
+        const duration = parseInt(element.dataset.duration) || 2000;
+        const startValue = 0;
+        
+        let currentValue = startValue;
+        const increment = finalValue / (duration / 16); // 60fps
+        
+        const updateCounter = () => {
+            currentValue += increment;
+            if (currentValue >= finalValue) {
+                element.textContent = finalValue;
+                return;
+            }
+            
+            element.textContent = Math.floor(currentValue);
+            requestAnimationFrame(updateCounter);
+        };
+        
+        updateCounter();
+    }
+
+    handleProgressAnimations(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !this.animatedElements.has(entry.target)) {
+                this.animateProgress(entry.target);
+                this.animatedElements.add(entry.target);
+            }
+        });
+    }
+
+    animateProgress(element) {
+        const targetWidth = element.dataset.progress || '100%';
+        const duration = parseInt(element.dataset.duration) || 1500;
+        
+        element.style.width = '0%';
+        element.style.transition = `width ${duration}ms ease-out`;
+        
+        setTimeout(() => {
+            element.style.width = targetWidth;
+        }, 100);
+    }
+
+    // Special animations for specific use cases
+    initSpecialAnimations() {
+        this.initTypewriterEffect();
+        this.initStaggeredTextReveal();
+        this.initMorphingShapes();
+    }
+
+    initTypewriterEffect() {
+        const typewriterElements = document.querySelectorAll('[data-typewriter]');
+        
+        typewriterElements.forEach(element => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !this.animatedElements.has(entry.target)) {
+                        this.typewriterAnimation(entry.target);
+                        this.animatedElements.add(entry.target);
+                    }
+                });
+            }, this.config.entrance);
+            
+            observer.observe(element);
+        });
+    }
+
+    typewriterAnimation(element) {
+        const text = element.dataset.typewriter;
+        const speed = parseInt(element.dataset.speed) || 80;
+        
+        element.textContent = '';
+        element.style.borderRight = '2px solid var(--text-accent)';
+        
+        let i = 0;
+        const typeWriter = () => {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            } else {
+                // Remove cursor after animation
+                setTimeout(() => {
+                    element.style.borderRight = 'none';
+                }, 1000);
+            }
+        };
+        
+        typeWriter();
+    }
+
+    initStaggeredTextReveal() {
+        const textElements = document.querySelectorAll('.staggered-text');
+        
+        textElements.forEach(element => {
+            const words = element.textContent.split(' ');
+            element.innerHTML = words.map(word => 
+                `<span class="word-reveal">${word}</span>`
+            ).join(' ');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        this.revealWords(entry.target);
+                    }
+                });
+            }, this.config.entrance);
+            
+            observer.observe(element);
+        });
+    }
+
+    revealWords(element) {
+        const words = element.querySelectorAll('.word-reveal');
+        
+        words.forEach((word, index) => {
+            setTimeout(() => {
+                word.classList.add('revealed');
+            }, index * 150);
+        });
+    }
+
+    initMorphingShapes() {
+        const morphingElements = document.querySelectorAll('.morphing-shape');
+        
+        morphingElements.forEach(element => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        element.classList.add('morphing-active');
+                    }
+                });
+            }, this.config.default);
+            
+            observer.observe(element);
+        });
+    }
+
+    // Fallback for browsers without IntersectionObserver
+    initFallback() {
+        let ticking = false;
+        
+        const handleScroll = () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    this.checkElementsInViewport();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        };
+        
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        this.checkElementsInViewport(); // Initial check
+    }
+
+    checkElementsInViewport() {
+        const elements = document.querySelectorAll('.animate-on-scroll');
+        const windowHeight = window.innerHeight;
+        
+        elements.forEach(element => {
+            if (this.animatedElements.has(element)) return;
+            
+            const elementTop = element.getBoundingClientRect().top;
+            const elementBottom = element.getBoundingClientRect().bottom;
+            
+            if (elementTop < windowHeight && elementBottom >= 0) {
+                this.animateEntrance(element);
+                this.animatedElements.add(element);
+            }
+        });
+    }
+
+    // Public API methods
+    addCustomAnimation(element, animationType, delay = 0) {
+        setTimeout(() => {
+            element.classList.add(animationType);
+        }, delay);
+    }
+
+    pauseAnimations() {
+        this.observers.forEach(observer => observer.disconnect());
+    }
+
+    resumeAnimations() {
+        this.setupObservers();
+        this.observeElements();
+    }
+
+    destroy() {
+        this.observers.forEach(observer => observer.disconnect());
+        this.observers.clear();
+        this.animatedElements.clear();
+    }
+}
+
+// Initialize animations when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    window.scrollAnimations = new ScrollAnimations();
 });
 
-function initScrollAnimations() {
-    // Create Intersection Observer for glass cards
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                // Add staggered animation delay for multiple cards
-                const delay = Array.from(entry.target.parentNode.children).indexOf(entry.target) * 100;
-                entry.target.style.animationDelay = `${delay}ms`;
-            }
-        });
-    }, observerOptions);
-    
-    // Observe all glass cards (except hero which is handled separately)
-    const glassCards = document.querySelectorAll('.glass-card:not(.hero .glass-card)');
-    glassCards.forEach(card => {
-        observer.observe(card);
-    });
-    
-    // Observe section titles
-    const sectionTitles = document.querySelectorAll('.section-title');
-    sectionTitles.forEach(title => {
-        observer.observe(title);
-    });
-    
-    console.log('✅ Scroll animations initialized');
+// Export for module usage
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = ScrollAnimations;
 }
-
-function initAnimateOnScrollElements() {
-    // Handle elements with animate-on-scroll class
-    const animateElements = document.querySelectorAll('.animate-on-scroll');
-    
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -10% 0px'
-    };
-    
-    const animateObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Determine animation type based on element
-                let animationClass = 'fadeInUp';
-                
-                if (entry.target.classList.contains('project-card')) {
-                    animationClass = 'scaleIn';
-                } else if (entry.target.classList.contains('section-title')) {
-                    animationClass = 'fadeInDown';
-                } else if (entry.target.classList.contains('contact-info')) {
-                    animationClass = 'fadeInLeft';
-                } else if (entry.target.classList.contains('contact-form')) {
-                    animationClass = 'fadeInRight';
-                }
-                
-                // Add staggered delay for grid items
-                const isGridItem = entry.target.closest('.projects-grid');
-                if (isGridItem) {
-                    const gridItems = Array.from(isGridItem.children);
-                    const index = gridItems.indexOf(entry.target);
-                    entry.target.style.animationDelay = `${index * 150}ms`;
-                }
-                
-                entry.target.classList.add(animationClass);
-                animateObserver.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-    
-    animateElements.forEach(element => {
-        animateObserver.observe(element);
-    });
-    
-    console.log('✅ Animate-on-scroll elements initialized');
-}
-
-function initParallaxEffects() {
-    const hero = document.querySelector('.hero');
-    const shapes = document.querySelectorAll('.shape');
-    
-    if (!hero || shapes.length === 0) return;
-    
-    function updateParallax() {
-        const scrolled = window.pageYOffset;
-        const heroHeight = hero.offsetHeight;
-        const scrollPercent = scrolled / heroHeight;
-        
-        if (scrollPercent <= 1) {
-            shapes.forEach((shape, index) => {
-                const speed = 0.5 + (index * 0.1); // Different speeds for each shape
-                const yPos = scrolled * speed;
-                const rotation = scrolled * (0.1 + index * 0.05);
-                
-                // Don't override hero-animations.js transforms
-                if (!shape.style.transform.includes('scale')) {
-                    shape.style.transform = `translateY(${yPos}px) rotate(${rotation}deg)`;
-                }
-            });
-        }
-    }
-    
-    // Use requestAnimationFrame for smooth animations
-    let ticking = false;
-    
-    function requestTick() {
-        if (!ticking) {
-            requestAnimationFrame(updateParallax);
-            ticking = true;
-            setTimeout(() => { ticking = false; }, 16); // ~60fps
-        }
-    }
-    
-    window.addEventListener('scroll', requestTick, { passive: true });
-    
-    console.log('✅ Parallax effects initialized');
-}
-
-// Advanced animations for elements
-function animateOnScroll(element, animationClass = 'fadeInUp', delay = 0) {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.classList.add(animationClass);
-                    observer.unobserve(entry.target);
-                }, delay);
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -20px 0px'
-    });
-    
-    observer.observe(element);
-}
-
-// Staggered animations for lists/grids
-function staggeredAnimation(elements, animationClass = 'fadeInUp', staggerDelay = 100) {
-    elements.forEach((element, index) => {
-        animateOnScroll(element, animationClass, index * staggerDelay);
-    });
-}
-
-// Counter animation for numbers
-function animateCounter(element, start = 0, end, duration = 2000) {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const startTime = performance.now();
-                
-                function updateCounter(currentTime) {
-                    const elapsed = currentTime - startTime;
-                    const progress = Math.min(elapsed / duration, 1);
-                    
-                    // Easing function
-                    const easeOut = 1 - Math.pow(1 - progress, 3);
-                    const current = Math.round(start + (end - start) * easeOut);
-                    
-                    element.textContent = current;
-                    
-                    if (progress < 1) {
-                        requestAnimationFrame(updateCounter);
-                    }
-                }
-                
-                requestAnimationFrame(updateCounter);
-                observer.unobserve(entry.target);
-            }
-        });
-    });
-    
-    observer.observe(element);
-}
-
-// Typewriter effect
-function typewriterEffect(element, text, speed = 50) {
-    let i = 0;
-    element.textContent = '';
-    
-    function typeWriter() {
-        if (i < text.length) {
-            element.textContent += text.charAt(i);
-            i++;
-            setTimeout(typeWriter, speed);
-        }
-    }
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                typeWriter();
-                observer.unobserve(entry.target);
-            }
-        });
-    });
-    
-    observer.observe(element);
-}
-
-// Reveal animations on scroll
-function revealOnScroll() {
-    const reveals = document.querySelectorAll('.reveal');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('revealed');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.15,
-        rootMargin: '0px 0px -10% 0px'
-    });
-    
-    reveals.forEach(reveal => {
-        observer.observe(reveal);
-    });
-}
-
-// Enhanced CSS animations
-const enhancedAnimationStyles = `
-    .fadeInUp {
-        opacity: 0;
-        transform: translateY(30px);
-        animation: fadeInUp 0.8s ease forwards;
-    }
-    
-    .fadeInDown {
-        opacity: 0;
-        transform: translateY(-30px);
-        animation: fadeInDown 0.8s ease forwards;
-    }
-    
-    .fadeInLeft {
-        opacity: 0;
-        transform: translateX(-40px);
-        animation: fadeInLeft 0.8s ease forwards;
-    }
-    
-    .fadeInRight {
-        opacity: 0;
-        transform: translateX(40px);
-        animation: fadeInRight 0.8s ease forwards;
-    }
-    
-    .scaleIn {
-        opacity: 0;
-        transform: scale(0.8) translateY(20px);
-        animation: scaleIn 0.7s ease forwards;
-    }
-    
-    .slideInUp {
-        opacity: 0;
-        transform: translateY(50px);
-        animation: slideInUp 0.6s ease forwards;
-    }
-    
-    .bounceIn {
-        opacity: 0;
-        transform: scale(0.3);
-        animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-    }
-    
-    .rotateIn {
-        opacity: 0;
-        transform: rotate(-10deg) scale(0.8);
-        animation: rotateIn 0.8s ease forwards;
-    }
-    
-    /* Keyframe animations */
-    @keyframes fadeInUp {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    @keyframes fadeInDown {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    @keyframes fadeInLeft {
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    
-    @keyframes fadeInRight {
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    
-    @keyframes scaleIn {
-        to {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-        }
-    }
-    
-    @keyframes slideInUp {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    @keyframes bounceIn {
-        0% {
-            opacity: 0;
-            transform: scale(0.3);
-        }
-        50% {
-            opacity: 1;
-            transform: scale(1.05);
-        }
-        70% {
-            transform: scale(0.9);
-        }
-        100% {
-            opacity: 1;
-            transform: scale(1);
-        }
-    }
-    
-    @keyframes rotateIn {
-        to {
-            opacity: 1;
-            transform: rotate(0deg) scale(1);
-        }
-    }
-    
-    /* Reveal animations */
-    .reveal {
-        opacity: 0;
-        transform: translateY(50px);
-        transition: all 0.8s ease;
-    }
-    
-    .reveal.revealed {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    
-    /* Staggered animations */
-    .stagger-animation > *:nth-child(1) { animation-delay: 0.1s; }
-    .stagger-animation > *:nth-child(2) { animation-delay: 0.2s; }
-    .stagger-animation > *:nth-child(3) { animation-delay: 0.3s; }
-    .stagger-animation > *:nth-child(4) { animation-delay: 0.4s; }
-    .stagger-animation > *:nth-child(5) { animation-delay: 0.5s; }
-    .stagger-animation > *:nth-child(6) { animation-delay: 0.6s; }
-    
-    /* Hover animations */
-    .hover-float:hover {
-        transform: translateY(-5px);
-        transition: transform 0.3s ease;
-    }
-    
-    .hover-scale:hover {
-        transform: scale(1.05);
-        transition: transform 0.3s ease;
-    }
-    
-    .hover-rotate:hover {
-        transform: rotate(5deg);
-        transition: transform 0.3s ease;
-    }
-    
-    /* Loading animations */
-    .loading {
-        animation: pulse 2s infinite;
-    }
-    
-    @keyframes pulse {
-        0% {
-            opacity: 1;
-        }
-        50% {
-            opacity: 0.5;
-        }
-        100% {
-            opacity: 1;
-        }
-    }
-    
-    /* Reduced motion support */
-    @media (prefers-reduced-motion: reduce) {
-        .fadeInUp,
-        .fadeInDown,
-        .fadeInLeft,
-        .fadeInRight,
-        .scaleIn,
-        .slideInUp,
-        .bounceIn,
-        .rotateIn,
-        .reveal {
-            animation: none;
-            opacity: 1;
-            transform: none;
-            transition: none;
-        }
-        
-        .hover-float:hover,
-        .hover-scale:hover,
-        .hover-rotate:hover {
-            transform: none;
-        }
-        
-        .loading {
-            animation: none;
-        }
-    }
-    
-    /* Performance optimizations */
-    .animate-on-scroll {
-        will-change: transform, opacity;
-    }
-    
-    .animate-on-scroll.fadeInUp,
-    .animate-on-scroll.fadeInDown,
-    .animate-on-scroll.fadeInLeft,
-    .animate-on-scroll.fadeInRight,
-    .animate-on-scroll.scaleIn {
-        will-change: auto;
-    }
-`;
-
-// Add enhanced styles to head
-const enhancedStyleSheet = document.createElement('style');
-enhancedStyleSheet.textContent = enhancedAnimationStyles;
-document.head.appendChild(enhancedStyleSheet);
-
-// Initialize reveal animations
-document.addEventListener('DOMContentLoaded', revealOnScroll);
-
-export { animateOnScroll, staggeredAnimation, animateCounter, typewriterEffect, revealOnScroll };

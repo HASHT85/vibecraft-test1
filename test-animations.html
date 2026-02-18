@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Animations - Portfolio</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/themes.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/glassmorphism.css">
+    <link rel="stylesheet" href="/css/animations.css">
+    <link rel="stylesheet" href="/css/about-section.css">
+    
+    <style>
+        body {
+            padding-top: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .test-section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .test-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: white;
+        }
+        
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .animation-demo {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+        
+        .demo-title {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .spacer {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .counter-demo {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #4ade80;
+            margin: 20px 0;
+        }
+        
+        .progress-demo {
+            margin: 20px 0;
+        }
+        
+        .progress-label {
+            color: white;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" style="position: fixed; top: 0; z-index: 1000;">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h2>Test Animations</h2>
+            </div>
+            <div class="nav-menu">
+                <button class="theme-toggle" aria-label="Basculer le thème">🌙</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Spacer pour déclencher le scroll -->
+    <div class="spacer">
+        <div>Scrollez pour voir les animations ! ⬇️</div>
+    </div>
+
+    <!-- Section 1: Animations d'entrée -->
+    <section class="test-section">
+        <h2 class="test-title animate-on-scroll">Animations d'entrée</h2>
+        <div class="animation-grid">
+            <div class="animation-demo glass-card animate-on-scroll">
+                <h3 class="demo-title">fadeInUp</h3>
+                <p>Animation qui monte depuis le bas</p>
+            </div>
+            <div class="animation-demo glass-card animate-on-scroll">
+                <h3 class="demo-title">fadeInLeft</h3>
+                <p>Animation depuis la gauche</p>
+            </div>
+            <div class="animation-demo glass-card animate-on-scroll">
+                <h3 class="demo-title">fadeInRight</h3>
+                <p>Animation depuis la droite</p>
+            </div>
+            <div class="animation-demo glass-card animate-on-scroll">
+                <h3 class="demo-title">scaleIn</h3>
+                <p>Animation d'agrandissement</p>
+            </div>
+            <div class="animation-demo glass-card animate-on-scroll">
+                <h3 class="demo-title">bounceIn</h3>
+                <p>Animation avec rebond</p>
+            </div>
+            <div class="animation-demo glass-card animate-on-scroll">
+                <h3 class="demo-title">rotateIn</h3>
+                <p>Animation avec rotation</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="spacer">Continuez à scroller ! 📱</div>
+
+    <!-- Section 2: Animations de compteur -->
+    <section class="test-section">
+        <h2 class="test-title animate-on-scroll">Animations de compteur</h2>
+        <div class="animation-grid">
+            <div class="animation-demo glass-card animate-on-scroll">
+                <h3 class="demo-title">Projets réalisés</h3>
+                <div class="counter-demo" data-counter="150">0</div>
+            </div>
+            <div class="animation-demo glass-card animate-on-scroll">
+                <h3 class="demo-title">Clients satisfaits</h3>
+                <div class="counter-demo" data-counter="50">0</div>
+            </div>
+            <div class="animation-demo glass-card animate-on-scroll">
+                <h3 class="demo-title">Années d'expérience</h3>
+                <div class="counter-demo" data-counter="5">0</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="spacer">Encore un peu ! ⚡</div>
+
+    <!-- Section 3: Barres de progression -->
+    <section class="test-section">
+        <h2 class="test-title animate-on-scroll">Barres de progression</h2>
+        <div class="animation-grid">
+            <div class="animation-demo glass-card animate-on-scroll">
+                <div class="progress-demo">
+                    <div class="progress-label">JavaScript - 90%</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="90%"></div>
+                    </div>
+                </div>
+                <div class="progress-demo">
+                    <div class="progress-label">React - 85%</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="85%"></div>
+                    </div>
+                </div>
+                <div class="progress-demo">
+                    <div class="progress-label">CSS - 95%</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="95%"></div>
+                    </div>
+                </div>
+                <div class="progress-demo">
+                    <div class="progress-label">Node.js - 80%</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="80%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="spacer">Plus d'animations ! 🎭</div>
+
+    <!-- Section 4: Animations spéciales -->
+    <section class="test-section">
+        <h2 class="test-title animate-on-scroll">Animations spéciales</h2>
+        <div class="animation-grid">
+            <div class="animation-demo glass-card animate-on-scroll">
+                <h3 class="demo-title">Typewriter Effect</h3>
+                <p data-typewriter="Ce texte s'écrit tout seul !" data-speed="100">Ce texte s'écrit tout seul !</p>
+            </div>
+            <div class="animation-demo glass-card animate-on-scroll">
+                <h3 class="demo-title">Staggered Text</h3>
+                <p class="staggered-text">Chaque mot apparaît séparément</p>
+            </div>
+            <div class="animation-demo glass-card animate-on-scroll">
+                <h3 class="demo-title">Floating Shape</h3>
+                <div class="morphing-shape floating" style="width: 80px; height: 80px; background: linear-gradient(45deg, #ff6b6b, #4ecdc4); margin: 20px auto; border-radius: 20px;"></div>
+            </div>
+            <div class="animation-demo glass-card animate-on-scroll">
+                <h3 class="demo-title">Rotating Element</h3>
+                <div class="rotating" style="width: 60px; height: 60px; background: linear-gradient(45deg, #a8edea, #fed6e3); margin: 20px auto; border-radius: 50%;"></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="spacer">Animations avec hover ! 🖱️</div>
+
+    <!-- Section 5: Animations hover -->
+    <section class="test-section">
+        <h2 class="test-title animate-on-scroll">Animations au survol</h2>
+        <div class="animation-grid">
+            <div class="animation-demo glass-card animate-on-scroll animate-hover">
+                <h3 class="demo-title">Hover Effect 1</h3>
+                <p>Survolez cette carte !</p>
+            </div>
+            <div class="animation-demo glass-card animate-on-scroll animate-hover">
+                <h3 class="demo-title">Hover Effect 2</h3>
+                <p>Et celle-ci aussi !</p>
+            </div>
+            <div class="animation-demo glass-card animate-on-scroll animate-hover">
+                <h3 class="demo-title">Hover Effect 3</h3>
+                <p>Toutes les cartes sont interactives !</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tags flottants -->
+    <section class="test-section">
+        <h2 class="test-title animate-on-scroll">Tags avec animations</h2>
+        <div style="text-align: center;">
+            <div class="skills-preview">
+                <span class="skill-tag animate-on-scroll">HTML5</span>
+                <span class="skill-tag animate-on-scroll">CSS3</span>
+                <span class="skill-tag animate-on-scroll">JavaScript</span>
+                <span class="skill-tag animate-on-scroll">React</span>
+                <span class="skill-tag animate-on-scroll">Vue.js</span>
+                <span class="skill-tag animate-on-scroll">Node.js</span>
+                <span class="skill-tag animate-on-scroll">MongoDB</span>
+                <span class="skill-tag animate-on-scroll">Docker</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="spacer" style="height: 50vh;">
+        <div>🎉 Fin des animations ! 🎉</div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="/js/theme-toggle.js"></script>
+    <script src="/js/animations.js"></script>
+    
+    <script>
+        // Démonstration des fonctionnalités
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page de test chargée');
+            
+            // Ajout d'un bouton pour relancer les animations
+            const resetBtn = document.createElement('button');
+            resetBtn.textContent = '🔄 Relancer les animations';
+            resetBtn.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                padding: 10px 20px;
+                background: linear-gradient(45deg, #667eea, #764ba2);
+                color: white;
+                border: none;
+                border-radius: 25px;
+                cursor: pointer;
+                font-weight: bold;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                z-index: 1000;
+            `;
+            
+            resetBtn.addEventListener('click', function() {
+                // Recharger la page pour relancer les animations
+                window.location.reload();
+            });
+            
+            document.body.appendChild(resetBtn);
+        });
+    </script>
+</body>
+</html>

@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="/css/themes.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/glassmorphism.css">
+    <link rel="stylesheet" href="/css/animations.css">
     <link rel="stylesheet" href="/css/hero-animations.css">
     <link rel="stylesheet" href="/css/about-section.css">
     <link rel="stylesheet" href="/css/contact-form.css">
@@ -32,14 +33,14 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
-                <h2>Portfolio</h2>
+                <h2 class="floating">Portfolio</h2>
             </div>
             <div class="nav-menu">
                 <a href="#hero" class="nav-link">Accueil</a>
                 <a href="#about" class="nav-link">À propos</a>
                 <a href="#projects" class="nav-link">Projets</a>
                 <a href="#contact" class="nav-link">Contact</a>
-                <button class="theme-toggle" aria-label="Basculer le thème">🌙</button>
+                <button class="theme-toggle animate-hover" aria-label="Basculer le thème">🌙</button>
             </div>
             <div class="hamburger">
                 <span></span>
@@ -52,24 +53,24 @@
     <!-- Hero Section -->
     <section id="hero" class="hero">
         <div class="hero-content glass-card">
-            <h1 class="hero-title">Bonjour, je suis Développeur Full Stack</h1>
+            <h1 class="hero-title staggered-text">Bonjour, je suis Développeur Full Stack</h1>
             <p class="hero-description" data-typewriter="Passionné par les technologies web modernes et l'innovation" data-speed="60">Passionné par les technologies web modernes et l'innovation</p>
             <div class="hero-actions">
-                <a href="#projects" class="btn btn-primary">
+                <a href="#projects" class="btn btn-primary animate-hover">
                     <span>Voir mes projets</span>
                 </a>
-                <a href="#contact" class="btn btn-secondary">
+                <a href="#contact" class="btn btn-secondary animate-hover">
                     <span>Me contacter</span>
                 </a>
             </div>
         </div>
-        <div class="hero-background">
+        <div class="hero-background parallax-element">
             <div class="floating-shapes">
-                <div class="shape shape-1"></div>
-                <div class="shape shape-2"></div>
-                <div class="shape shape-3"></div>
-                <div class="shape shape-4"></div>
-                <div class="shape shape-5"></div>
+                <div class="shape shape-1 morphing-shape floating"></div>
+                <div class="shape shape-2 morphing-shape rotating"></div>
+                <div class="shape shape-3 morphing-shape floating"></div>
+                <div class="shape shape-4 morphing-shape"></div>
+                <div class="shape shape-5 morphing-shape floating"></div>
             </div>
         </div>
     </section>
@@ -81,14 +82,54 @@
             <div class="about-content glass-card animate-on-scroll">
                 <!-- Content will be populated dynamically by about-section.js -->
                 <div class="about-text">
-                    <p>Chargement des données...</p>
+                    <p class="animate-on-scroll">Chargement des données...</p>
+                    <div class="about-stats animate-on-scroll">
+                        <div class="stat-item">
+                            <div class="stat-number" data-counter="50">0</div>
+                            <div class="stat-label">Projets réalisés</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-counter="5">0</div>
+                            <div class="stat-label">Années d'expérience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-counter="20">0</div>
+                            <div class="stat-label">Technologies maîtrisées</div>
+                        </div>
+                    </div>
                     <div class="skills-preview" id="skills-container">
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">React</span>
-                        <span class="skill-tag">Node.js</span>
-                        <span class="skill-tag">CSS3</span>
-                        <span class="skill-tag">TypeScript</span>
-                        <span class="skill-tag">Vue.js</span>
+                        <span class="skill-tag animate-on-scroll">JavaScript</span>
+                        <span class="skill-tag animate-on-scroll">React</span>
+                        <span class="skill-tag animate-on-scroll">Node.js</span>
+                        <span class="skill-tag animate-on-scroll">CSS3</span>
+                        <span class="skill-tag animate-on-scroll">TypeScript</span>
+                        <span class="skill-tag animate-on-scroll">Vue.js</span>
+                    </div>
+                    <div class="skills-bars animate-on-scroll">
+                        <div class="skill-item">
+                            <div class="skill-name">JavaScript</div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">React</div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Node.js</div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">CSS3</div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="95%"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -99,15 +140,15 @@
     <section id="projects" class="projects">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Mes Projets</h2>
-            <div class="project-filters">
-                <button class="filter-btn active" data-filter="all">Tous</button>
-                <button class="filter-btn" data-filter="web">Web</button>
-                <button class="filter-btn" data-filter="mobile">Mobile</button>
-                <button class="filter-btn" data-filter="api">API</button>
+            <div class="project-filters animate-on-scroll">
+                <button class="filter-btn active animate-hover" data-filter="all">Tous</button>
+                <button class="filter-btn animate-hover" data-filter="web">Web</button>
+                <button class="filter-btn animate-hover" data-filter="mobile">Mobile</button>
+                <button class="filter-btn animate-hover" data-filter="api">API</button>
             </div>
             <div class="projects-grid" id="projects-grid">
                 <!-- Projects will be loaded dynamically -->
-                <div class="project-card glass-card animate-on-scroll" data-category="web">
+                <div class="project-card glass-card animate-on-scroll animate-hover will-animate" data-category="web">
                     <div class="project-image">
                         <div class="placeholder-image">📱</div>
                     </div>
@@ -121,12 +162,12 @@
                             <span class="tech-tag">Vite</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link">Demo</a>
-                            <a href="#" class="project-link">Code</a>
+                            <a href="#" class="project-link animate-hover">Demo</a>
+                            <a href="#" class="project-link animate-hover">Code</a>
                         </div>
                     </div>
                 </div>
-                <div class="project-card glass-card animate-on-scroll" data-category="web">
+                <div class="project-card glass-card animate-on-scroll animate-hover will-animate" data-category="web">
                     <div class="project-image">
                         <div class="placeholder-image">⚛️</div>
                     </div>
@@ -139,12 +180,12 @@
                             <span class="tech-tag">Styled Components</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link">Demo</a>
-                            <a href="#" class="project-link">Code</a>
+                            <a href="#" class="project-link animate-hover">Demo</a>
+                            <a href="#" class="project-link animate-hover">Code</a>
                         </div>
                     </div>
                 </div>
-                <div class="project-card glass-card animate-on-scroll" data-category="api">
+                <div class="project-card glass-card animate-on-scroll animate-hover will-animate" data-category="api">
                     <div class="project-image">
                         <div class="placeholder-image">🚀</div>
                     </div>
@@ -158,8 +199,26 @@
                             <span class="tech-tag">JWT</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link">Demo</a>
-                            <a href="#" class="project-link">Code</a>
+                            <a href="#" class="project-link animate-hover">Demo</a>
+                            <a href="#" class="project-link animate-hover">Code</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card glass-card animate-on-scroll animate-hover will-animate" data-category="mobile">
+                    <div class="project-image">
+                        <div class="placeholder-image">📱</div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">App Mobile</h3>
+                        <p class="project-description">Application mobile native avec React Native</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Redux</span>
+                            <span class="tech-tag">Firebase</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link animate-hover">Demo</a>
+                            <a href="#" class="project-link animate-hover">Code</a>
                         </div>
                     </div>
                 </div>
@@ -176,15 +235,15 @@
                     <h3>Discutons de votre projet</h3>
                     <p>Je suis toujours intéressé par de nouveaux défis et collaborations.</p>
                     <div class="contact-methods">
-                        <div class="contact-method">
+                        <div class="contact-method animate-on-scroll">
                             <span class="contact-icon">📧</span>
                             <span>contact@portfolio.com</span>
                         </div>
-                        <div class="contact-method">
+                        <div class="contact-method animate-on-scroll">
                             <span class="contact-icon">💼</span>
                             <span>LinkedIn</span>
                         </div>
-                        <div class="contact-method">
+                        <div class="contact-method animate-on-scroll">
                             <span class="contact-icon">📱</span>
                             <span>+33 1 23 45 67 89</span>
                         </div>
@@ -216,32 +275,21 @@
                             placeholder="votre@email.com">
                     </div>
                     <div class="form-group">
-                        <label for="subject">Sujet</label>
-                        <input 
-                            type="text" 
-                            id="subject" 
-                            name="subject" 
-                            autocomplete="off"
-                            maxlength="100"
-                            placeholder="Sujet de votre message">
-                    </div>
-                    <div class="form-group">
                         <label for="message">Message *</label>
                         <textarea 
                             id="message" 
                             name="message" 
-                            rows="6" 
                             required 
-                            aria-describedby="message-error"
+                            rows="5" 
                             minlength="10"
                             maxlength="1000"
-                            placeholder="Décrivez votre projet, vos besoins ou toute question..."></textarea>
+                            placeholder="Décrivez votre projet ou votre demande..."></textarea>
                     </div>
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary animate-hover">
                             <span>Envoyer le message</span>
                         </button>
-                        <button type="reset" class="btn btn-secondary">
+                        <button type="reset" class="btn animate-hover">
                             <span>Effacer</span>
                         </button>
                     </div>
@@ -253,15 +301,17 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Portfolio. Tous droits réservés.</p>
+            <p class="animate-on-scroll">&copy; 2024 Portfolio. Fait avec ❤️ et du code propre.</p>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script type="module" src="/js/main.js"></script>
-    <script type="module" src="/js/theme-toggle.js"></script>
-    <script type="module" src="/js/animations.js"></script>
-    <script type="module" src="/js/about-section.js"></script>
-    <script type="module" src="/js/contact-form.js"></script>
+    <!-- JavaScript -->
+    <script src="/js/theme-toggle.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/animations.js"></script>
+    <script src="/js/hero-animations.js"></script>
+    <script src="/js/about-section.js"></script>
+    <script src="/js/project-filter.js"></script>
+    <script src="/js/contact-form.js"></script>
 </body>
 </html>
