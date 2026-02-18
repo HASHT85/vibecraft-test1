@@ -3,51 +3,96 @@
 # Build stage
 FROM node:18-alpine AS builder
 
-# Install curl and build dependencies
-RUN apk add --no-cache curl python3 make g++
+# Install build dependencies
+RUN apk add --no-cache \
+    curl \
+    python3 \
+    make \
+    g++ \
+    && rm -rf /var/cache/apk/*
 
 WORKDIR /app
 
-# Copy package files first for better caching
+# Copy package files first for better Docker layer caching
 COPY package*.json ./
 
-# Install ALL dependencies (including devDependencies needed for build)
-RUN npm ci --only=production=false
+# Install dependencies (including devDependencies for build)
+RUN npm ci --only=production=false --silent
 
 # Copy source code
 COPY . .
 
-# Build the application
+# Build the application with optimizations
+ENV NODE_ENV=production
 RUN npm run build
 
-# Verify build output exists
-RUN ls -la dist/
+# Verify build output exists and show structure
+RUN echo "Build output:" && \
+    ls -la dist/ && \
+    echo "Total size:" && \
+    du -sh dist/
 
 # Production stage
 FROM nginx:alpine AS production
 
-# Install curl for healthcheck
-RUN apk add --no-cache curl
+# Install security updates and curl for healthcheck
+RUN apk add --no-cache --upgrade \
+    curl \
+    ca-certificates \
+    && rm -rf /var/cache/apk/*
 
-# Copy custom nginx config
+# Create nginx directories for logs
+RUN mkdir -p /var/log/nginx && \
+    touch /var/log/nginx/access.log && \
+    touch /var/log/nginx/error.log
+
+# Copy optimized nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Remove default nginx config
+RUN rm /etc/nginx/conf.d/default.conf.original 2>/dev/null || true
 
 # Copy built application from builder stage
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Verify files are copied
-RUN ls -la /usr/share/nginx/html/
+# Copy additional static files if they exist
+COPY --from=builder /app/robots.txt /usr/share/nginx/html/ 2>/dev/null || true
+COPY --from=builder /app/sitemap.xml /usr/share/nginx/html/ 2>/dev/null || true
+COPY --from=builder /app/manifest.json /usr/share/nginx/html/ 2>/dev/null || true
+COPY --from=builder /app/sw.js /usr/share/nginx/html/ 2>/dev/null || true
+COPY --from=builder /app/favicon.svg /usr/share/nginx/html/ 2>/dev/null || true
 
-# Create nginx user and set permissions
-RUN chown -R nginx:nginx /usr/share/nginx/html && \
-    chmod -R 755 /usr/share/nginx/html
+# Verify files are properly copied
+RUN echo "Production files:" && \
+    ls -la /usr/share/nginx/html/ && \
+    echo "Total production size:" && \
+    du -sh /usr/share/nginx/html/
 
-# Add healthcheck
+# Set proper permissions for security
+RUN chown -R nginx:nginx /usr/share/nginx/html /var/log/nginx && \
+    chmod -R 755 /usr/share/nginx/html && \
+    chmod -R 644 /usr/share/nginx/html/* 2>/dev/null || true
+
+# Create non-root user for better security (nginx user already exists)
+USER nginx
+
+# Add comprehensive healthcheck
 HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
-    CMD curl -f http://localhost/ || exit 1
+    CMD curl -f http://localhost/health || curl -f http://localhost/ || exit 1
 
-# Expose port
+# Expose HTTP port
 EXPOSE 80
 
-# Start nginx
+# Add labels for better container management
+LABEL \
+    maintainer="Portfolio Developer" \
+    version="1.0.0" \
+    description="Portfolio Minimal - Production Container" \
+    org.opencontainers.image.source="https://github.com/yourusername/portfolio-minimal" \
+    org.opencontainers.image.documentation="https://github.com/yourusername/portfolio-minimal/blob/main/DOCKER.md"
+
+# Switch back to root for nginx startup (nginx will drop privileges)
+USER root
+
+# Start nginx with daemon off for Docker
 CMD ["nginx", "-g", "daemon off;"]

@@ -6,7 +6,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "docker:build": "chmod +x scripts/docker-build.sh && ./scripts/docker-build.sh",
+    "docker:validate": "chmod +x scripts/validate-docker.sh && ./scripts/validate-docker.sh",
+    "docker:deploy": "chmod +x scripts/deploy.sh && ./scripts/deploy.sh",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "docker:clean": "docker system prune -f && docker image prune -f"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.24",
@@ -19,9 +26,23 @@
     "portfolio",
     "vite",
     "glassmorphism",
-    "vanilla-js"
+    "vanilla-js",
+    "docker",
+    "production-ready"
   ],
   "author": "Portfolio Owner",
   "license": "MIT",
-  "main": "vite.config.js"
+  "main": "vite.config.js",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/portfolio-minimal.git"
+  },
+  "homepage": "https://yourdomain.com",
+  "bugs": {
+    "url": "https://github.com/yourusername/portfolio-minimal/issues"
+  }
 }
