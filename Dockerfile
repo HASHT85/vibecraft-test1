@@ -70,8 +70,8 @@ RUN echo "Production files:" && \
 
 # Set proper permissions for security
 RUN chown -R nginx:nginx /usr/share/nginx/html /var/log/nginx && \
-    chmod -R 755 /usr/share/nginx/html && \
-    chmod -R 644 /usr/share/nginx/html/* 2>/dev/null || true
+    find /usr/share/nginx/html -type d -exec chmod 755 {} \; && \
+    find /usr/share/nginx/html -type f -exec chmod 644 {} \;
 
 # Create non-root user for better security (nginx user already exists)
 USER nginx
