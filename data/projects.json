@@ -1,0 +1,114 @@
+{
+  "projects": [
+    {
+      "id": "portfolio-2024",
+      "title": "Portfolio Personnel 2024",
+      "description": "Site portfolio moderne avec effets glassmorphism, animations CSS et thème dark/light. Développé avec Vite.js et vanilla JavaScript pour des performances optimales.",
+      "image": "/assets/images/portfolio.webp",
+      "technologies": ["HTML5", "CSS3", "JavaScript", "Vite.js", "Docker"],
+      "demoUrl": "https://portfolio.example.com",
+      "githubUrl": "https://github.com/username/portfolio",
+      "featured": true,
+      "category": "web",
+      "status": "completed",
+      "year": 2024
+    },
+    {
+      "id": "ecommerce-api",
+      "title": "API E-commerce",
+      "description": "API RESTful complète pour plateforme e-commerce avec gestion des utilisateurs, produits, commandes et paiements. Architecture microservices avec Docker.",
+      "image": "/assets/images/api.webp",
+      "technologies": ["Node.js", "Express", "MongoDB", "JWT", "Stripe", "Docker"],
+      "demoUrl": "https://api-docs.example.com",
+      "githubUrl": "https://github.com/username/ecommerce-api",
+      "featured": true,
+      "category": "api",
+      "status": "completed",
+      "year": 2024
+    },
+    {
+      "id": "task-mobile-app",
+      "title": "TaskFlow Mobile",
+      "description": "Application mobile de gestion de tâches avec synchronisation cloud, notifications push et mode hors-ligne. Interface utilisateur intuitive et moderne.",
+      "image": "/assets/images/mobile-app.webp",
+      "technologies": ["React Native", "Expo", "TypeScript", "Firebase"],
+      "demoUrl": "https://taskflow.example.com",
+      "githubUrl": "https://github.com/username/taskflow-mobile",
+      "featured": false,
+      "category": "mobile",
+      "status": "in-progress",
+      "year": 2024
+    },
+    {
+      "id": "dashboard-web",
+      "title": "Dashboard Analytics",
+      "description": "Interface d'administration avec tableaux de bord interactifs, graphiques en temps réel et gestion d'utilisateurs. Design responsive et accessible.",
+      "image": "/assets/images/dashboard.webp",
+      "technologies": ["React", "TypeScript", "Chart.js", "Tailwind CSS"],
+      "demoUrl": "https://dashboard.example.com",
+      "githubUrl": "https://github.com/username/dashboard",
+      "featured": true,
+      "category": "web",
+      "status": "completed",
+      "year": 2023
+    },
+    {
+      "id": "blog-cms",
+      "title": "CMS Blog Headless",
+      "description": "Système de gestion de contenu headless avec éditeur WYSIWYG, gestion des médias et API GraphQL pour maximum de flexibilité.",
+      "image": "/assets/images/cms.webp",
+      "technologies": ["Next.js", "Strapi", "GraphQL", "PostgreSQL"],
+      "demoUrl": "https://blog-cms.example.com",
+      "githubUrl": "https://github.com/username/blog-cms",
+      "featured": false,
+      "category": "web",
+      "status": "completed",
+      "year": 2023
+    },
+    {
+      "id": "weather-pwa",
+      "title": "Weather PWA",
+      "description": "Application météo Progressive Web App avec géolocalisation, prévisions détaillées et fonctionnement hors-ligne. Interface adaptative.",
+      "image": "/assets/images/weather.webp",
+      "technologies": ["Vanilla JS", "Service Worker", "IndexedDB", "CSS Grid"],
+      "demoUrl": "https://weather-pwa.example.com",
+      "githubUrl": "https://github.com/username/weather-pwa",
+      "featured": false,
+      "category": "web",
+      "status": "completed",
+      "year": 2023
+    }
+  ],
+  "categories": [
+    {
+      "id": "web",
+      "name": "Web",
+      "description": "Applications web modernes et sites responsives"
+    },
+    {
+      "id": "mobile",
+      "name": "Mobile",
+      "description": "Applications mobiles natives et cross-platform"
+    },
+    {
+      "id": "api",
+      "name": "API",
+      "description": "APIs RESTful et services backend"
+    }
+  ],
+  "technologies": [
+    { "name": "JavaScript", "category": "frontend", "color": "#f7df1e" },
+    { "name": "TypeScript", "category": "frontend", "color": "#3178c6" },
+    { "name": "React", "category": "frontend", "color": "#61dafb" },
+    { "name": "Next.js", "category": "frontend", "color": "#000000" },
+    { "name": "Vue.js", "category": "frontend", "color": "#4fc08d" },
+    { "name": "HTML5", "category": "frontend", "color": "#e34f26" },
+    { "name": "CSS3", "category": "frontend", "color": "#1572b6" },
+    { "name": "Node.js", "category": "backend", "color": "#339933" },
+    { "name": "Express", "category": "backend", "color": "#000000" },
+    { "name": "MongoDB", "category": "database", "color": "#47a248" },
+    { "name": "PostgreSQL", "category": "database", "color": "#336791" },
+    { "name": "Docker", "category": "devops", "color": "#2496ed" },
+    { "name": "React Native", "category": "mobile", "color": "#61dafb" }
+  ]
+}

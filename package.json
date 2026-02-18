@@ -1,0 +1,19 @@
+{
+  "name": "portfolio-minimal",
+  "version": "1.0.0",
+  "description": "Portfolio minimal avec Vite.js et glassmorphism",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "postcss": "^8.4.32",
+    "autoprefixer": "^10.4.16"
+  },
+  "keywords": ["portfolio", "vite", "glassmorphism", "vanilla-js"],
+  "author": "Portfolio Owner",
+  "license": "MIT"
+}

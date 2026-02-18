@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio de développeur - Technologies modernes et projets innovants">
+    <meta name="keywords" content="développeur, portfolio, web, javascript, frontend">
+    <meta name="author" content="Portfolio Owner">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Portfolio - Développeur Web">
+    <meta property="og:description" content="Découvrez mes projets et compétences en développement web">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://monportfolio.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <title>Portfolio - Développeur Web</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/themes.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/glassmorphism.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h2>Portfolio</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="#hero" class="nav-link">Accueil</a>
+                <a href="#about" class="nav-link">À propos</a>
+                <a href="#projects" class="nav-link">Projets</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <button class="theme-toggle" aria-label="Basculer le thème">🌙</button>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-content glass-card">
+            <h1 class="hero-title">Bonjour, je suis <span class="highlight">Développeur</span></h1>
+            <p class="hero-description">Passionné par les technologies web modernes et l'innovation</p>
+            <div class="hero-actions">
+                <a href="#projects" class="btn btn-primary">Voir mes projets</a>
+                <a href="#contact" class="btn btn-secondary">Me contacter</a>
+            </div>
+        </div>
+        <div class="hero-background">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">À propos de moi</h2>
+            <div class="about-content glass-card">
+                <div class="about-text">
+                    <p>Développeur passionné avec une expertise en technologies web modernes. Je crée des expériences utilisateur exceptionnelles avec un code propre et performant.</p>
+                    <div class="skills-preview" id="skills-container">
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">CSS3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Mes Projets</h2>
+            <div class="project-filters">
+                <button class="filter-btn active" data-filter="all">Tous</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+                <button class="filter-btn" data-filter="mobile">Mobile</button>
+                <button class="filter-btn" data-filter="api">API</button>
+            </div>
+            <div class="projects-grid" id="projects-grid">
+                <!-- Projects will be loaded dynamically -->
+                <div class="project-card glass-card" data-category="web">
+                    <div class="project-image">
+                        <div class="placeholder-image">📱</div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Projet Demo</h3>
+                        <p class="project-description">Description du projet de démonstration</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JS</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Demo</a>
+                            <a href="#" class="project-link">Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contactez-moi</h2>
+            <div class="contact-content">
+                <div class="contact-info glass-card">
+                    <h3>Discutons de votre projet</h3>
+                    <p>Je suis toujours intéressé par de nouveaux défis et collaborations.</p>
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <span class="contact-icon">📧</span>
+                            <span>contact@portfolio.com</span>
+                        </div>
+                        <div class="contact-method">
+                            <span class="contact-icon">💼</span>
+                            <span>LinkedIn</span>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form glass-card" id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Nom</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Portfolio. Créé avec ❤️ et Vite.js</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="/js/main.js"></script>
+    <script type="module" src="/js/theme-toggle.js"></script>
+    <script type="module" src="/js/project-filter.js"></script>
+    <script type="module" src="/js/animations.js"></script>
+    <script type="module" src="/js/contact-form.js"></script>
+</body>
+</html>

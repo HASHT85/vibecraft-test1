@@ -1,0 +1,171 @@
+{
+  "personal": {
+    "name": "Alexandre Développeur",
+    "title": "Développeur Full Stack",
+    "tagline": "Passionné par les technologies web modernes",
+    "bio": "Développeur full stack avec plus de 5 ans d'expérience dans la création d'applications web et mobiles innovantes. Spécialisé dans les technologies JavaScript modernes et l'architecture cloud.",
+    "location": "Paris, France",
+    "avatar": "/assets/images/avatar.webp",
+    "resume": "/assets/documents/cv.pdf"
+  },
+  "contact": {
+    "email": "contact@portfolio.dev",
+    "phone": "+33 1 23 45 67 89",
+    "website": "https://portfolio.dev",
+    "availability": "Disponible pour de nouveaux projets"
+  },
+  "social": {
+    "github": "https://github.com/username",
+    "linkedin": "https://linkedin.com/in/username",
+    "twitter": "https://twitter.com/username",
+    "instagram": "https://instagram.com/username",
+    "dribbble": "https://dribbble.com/username",
+    "behance": "https://behance.net/username"
+  },
+  "skills": {
+    "frontend": [
+      { "name": "JavaScript", "level": 95, "years": 5 },
+      { "name": "TypeScript", "level": 90, "years": 3 },
+      { "name": "React", "level": 92, "years": 4 },
+      { "name": "Next.js", "level": 88, "years": 2 },
+      { "name": "Vue.js", "level": 85, "years": 3 },
+      { "name": "HTML5/CSS3", "level": 95, "years": 6 },
+      { "name": "Sass/SCSS", "level": 90, "years": 4 },
+      { "name": "Tailwind CSS", "level": 88, "years": 2 }
+    ],
+    "backend": [
+      { "name": "Node.js", "level": 90, "years": 4 },
+      { "name": "Express.js", "level": 88, "years": 4 },
+      { "name": "NestJS", "level": 80, "years": 2 },
+      { "name": "GraphQL", "level": 75, "years": 2 },
+      { "name": "REST APIs", "level": 92, "years": 5 },
+      { "name": "JWT Auth", "level": 88, "years": 3 }
+    ],
+    "mobile": [
+      { "name": "React Native", "level": 85, "years": 3 },
+      { "name": "Expo", "level": 88, "years": 3 },
+      { "name": "Flutter", "level": 70, "years": 1 }
+    ],
+    "database": [
+      { "name": "MongoDB", "level": 88, "years": 4 },
+      { "name": "PostgreSQL", "level": 85, "years": 3 },
+      { "name": "Redis", "level": 80, "years": 2 },
+      { "name": "Firebase", "level": 85, "years": 3 }
+    ],
+    "tools": [
+      { "name": "Git", "level": 95, "years": 6 },
+      { "name": "Docker", "level": 85, "years": 3 },
+      { "name": "Webpack/Vite", "level": 88, "years": 3 },
+      { "name": "Jest/Testing", "level": 85, "years": 3 },
+      { "name": "CI/CD", "level": 80, "years": 2 }
+    ]
+  },
+  "experience": [
+    {
+      "company": "TechCorp Solutions",
+      "position": "Développeur Full Stack Senior",
+      "location": "Paris, France",
+      "startDate": "2022-03",
+      "endDate": null,
+      "current": true,
+      "description": "Développement d'applications web complexes avec React/Node.js. Architecture microservices et déploiement cloud.",
+      "technologies": ["React", "Node.js", "AWS", "Docker", "MongoDB"]
+    },
+    {
+      "company": "WebAgency Pro",
+      "position": "Développeur Frontend",
+      "location": "Lyon, France",
+      "startDate": "2020-01",
+      "endDate": "2022-02",
+      "current": false,
+      "description": "Création d'interfaces utilisateur modernes et responsives pour diverses entreprises. Optimisation des performances web.",
+      "technologies": ["JavaScript", "Vue.js", "SCSS", "Webpack"]
+    },
+    {
+      "company": "StartupTech",
+      "position": "Développeur Junior",
+      "location": "Remote",
+      "startDate": "2019-06",
+      "endDate": "2019-12",
+      "current": false,
+      "description": "Premier poste en développement web. Apprentissage des bonnes pratiques et contribution aux projets de l'équipe.",
+      "technologies": ["HTML", "CSS", "JavaScript", "PHP"]
+    }
+  ],
+  "education": [
+    {
+      "institution": "École Supérieure d'Informatique",
+      "degree": "Master en Génie Logiciel",
+      "field": "Développement Web et Mobile",
+      "location": "Paris, France",
+      "startDate": "2017-09",
+      "endDate": "2019-06",
+      "grade": "Mention Bien"
+    },
+    {
+      "institution": "IUT Informatique",
+      "degree": "DUT Informatique",
+      "field": "Programmation et Systèmes",
+      "location": "Lyon, France",
+      "startDate": "2015-09",
+      "endDate": "2017-06",
+      "grade": "Mention Très Bien"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "AWS Certified Developer",
+      "issuer": "Amazon Web Services",
+      "date": "2023-08",
+      "credential": "AWS-DEV-2023-001",
+      "url": "https://aws.amazon.com/certification/"
+    },
+    {
+      "name": "Google Cloud Professional",
+      "issuer": "Google Cloud",
+      "date": "2023-05",
+      "credential": "GCP-PRO-2023-002",
+      "url": "https://cloud.google.com/certification"
+    }
+  ],
+  "languages": [
+    { "name": "Français", "level": "Natif", "code": "fr" },
+    { "name": "Anglais", "level": "Courant", "code": "en" },
+    { "name": "Espagnol", "level": "Intermédiaire", "code": "es" }
+  ],
+  "interests": [
+    "Nouvelles technologies",
+    "Open Source",
+    "IA et Machine Learning",
+    "Photography",
+    "Voyage",
+    "Gaming",
+    "Musique"
+  ],
+  "testimonials": [
+    {
+      "name": "Marie Dubois",
+      "position": "Product Manager",
+      "company": "TechCorp Solutions",
+      "content": "Alexandre est un développeur exceptionnel. Sa capacité à traduire les besoins complexes en solutions élégantes est remarquable.",
+      "avatar": "/assets/images/testimonial1.webp",
+      "rating": 5
+    },
+    {
+      "name": "Pierre Martin",
+      "position": "CTO",
+      "company": "WebAgency Pro",
+      "content": "Travail de qualité, respect des délais et excellente communication. Je recommande vivement Alexandre pour tout projet web.",
+      "avatar": "/assets/images/testimonial2.webp",
+      "rating": 5
+    }
+  ],
+  "stats": {
+    "projectsCompleted": 50,
+    "yearsExperience": 5,
+    "technologiesMastered": 25,
+    "clientsSatisfied": 30,
+    "codeLines": 100000,
+    "coffeesCups": 2500
+  }
+}

@@ -1,0 +1,240 @@
+/* Mobile First Responsive Design */
+
+/* Large screens (desktops) */
+@media (max-width: 1200px) {
+  .container {
+    padding: 0 var(--space-lg);
+  }
+}
+
+/* Medium screens (tablets) */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--space-md);
+  }
+  
+  /* Navigation Mobile */
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    flex-direction: column;
+    padding: var(--space-lg);
+    border-top: 1px solid var(--glass-border);
+    gap: var(--space-md);
+  }
+  
+  .nav-menu.active {
+    display: flex;
+  }
+  
+  .hamburger {
+    display: flex;
+  }
+  
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
+  
+  /* Hero Mobile */
+  .hero-title {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero-content {
+    padding: var(--space-xl);
+  }
+  
+  /* Projects Grid Mobile */
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  
+  /* Contact Mobile */
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  
+  .contact-info,
+  .contact-form {
+    padding: var(--space-lg);
+  }
+  
+  /* Sections Mobile */
+  section {
+    padding: var(--space-xl) 0;
+  }
+  
+  .section-title {
+    font-size: var(--font-size-2xl);
+  }
+}
+
+/* Small screens (mobile phones) */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 var(--space-sm);
+  }
+  
+  /* Typography Mobile */
+  .hero-title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .section-title {
+    font-size: var(--font-size-xl);
+  }
+  
+  /* Spacing Mobile */
+  section {
+    padding: var(--space-lg) 0;
+  }
+  
+  .hero-content {
+    padding: var(--space-lg);
+  }
+  
+  .contact-info,
+  .contact-form {
+    padding: var(--space-md);
+  }
+  
+  .project-card {
+    padding: var(--space-md);
+  }
+  
+  .about-content {
+    padding: var(--space-lg);
+  }
+  
+  /* Buttons Mobile */
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .hero-actions .btn {
+    width: auto;
+    min-width: 150px;
+  }
+  
+  /* Skills Mobile */
+  .skills-preview {
+    justify-content: center;
+  }
+  
+  .skill-tag {
+    font-size: var(--font-size-xs);
+  }
+  
+  /* Form Mobile */
+  .form-group input,
+  .form-group textarea {
+    font-size: var(--font-size-base);
+  }
+  
+  /* Project Filters Mobile */
+  .project-filters {
+    gap: var(--space-xs);
+  }
+  
+  .filter-btn {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: var(--font-size-sm);
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 320px) {
+  .hero-title {
+    font-size: var(--font-size-xl);
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .nav-container {
+    padding: 0 1rem;
+  }
+}
+
+/* Tablet Portrait */
+@media (max-width: 768px) and (orientation: portrait) {
+  .hero {
+    min-height: 80vh;
+  }
+  
+  .floating-shapes {
+    display: none;
+  }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .glass-card {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .navbar,
+  .theme-toggle,
+  .hamburger,
+  .floating-shapes,
+  .hero-background {
+    display: none;
+  }
+  
+  .hero {
+    min-height: auto;
+    padding: 2rem 0;
+  }
+  
+  .glass-card {
+    background: white;
+    border: 1px solid #ccc;
+    backdrop-filter: none;
+    box-shadow: none;
+  }
+  
+  * {
+    color: black !important;
+    background: white !important;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .floating-shapes {
+    display: none;
+  }
+}
