@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="/css/themes.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/glassmorphism.css">
+    <link rel="stylesheet" href="/css/hero-animations.css">
     <link rel="stylesheet" href="/css/responsive.css">
 </head>
 <body>
@@ -49,11 +50,15 @@
     <!-- Hero Section -->
     <section id="hero" class="hero">
         <div class="hero-content glass-card">
-            <h1 class="hero-title">Bonjour, je suis <span class="highlight">Développeur</span></h1>
-            <p class="hero-description">Passionné par les technologies web modernes et l'innovation</p>
+            <h1 class="hero-title">Bonjour, je suis Développeur Full Stack</h1>
+            <p class="hero-description" data-typewriter="Passionné par les technologies web modernes et l'innovation" data-speed="60">Passionné par les technologies web modernes et l'innovation</p>
             <div class="hero-actions">
-                <a href="#projects" class="btn btn-primary">Voir mes projets</a>
-                <a href="#contact" class="btn btn-secondary">Me contacter</a>
+                <a href="#projects" class="btn btn-primary">
+                    <span>Voir mes projets</span>
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                    <span>Me contacter</span>
+                </a>
             </div>
         </div>
         <div class="hero-background">
@@ -61,6 +66,8 @@
                 <div class="shape shape-1"></div>
                 <div class="shape shape-2"></div>
                 <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+                <div class="shape shape-5"></div>
             </div>
         </div>
     </section>
@@ -68,8 +75,8 @@
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
-            <h2 class="section-title">À propos de moi</h2>
-            <div class="about-content glass-card">
+            <h2 class="section-title animate-on-scroll">À propos de moi</h2>
+            <div class="about-content glass-card animate-on-scroll">
                 <div class="about-text">
                     <p>Développeur passionné avec une expertise en technologies web modernes. Je crée des expériences utilisateur exceptionnelles avec un code propre et performant.</p>
                     <div class="skills-preview" id="skills-container">
@@ -77,6 +84,8 @@
                         <span class="skill-tag">React</span>
                         <span class="skill-tag">Node.js</span>
                         <span class="skill-tag">CSS3</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">Vue.js</span>
                     </div>
                 </div>
             </div>
@@ -86,7 +95,7 @@
     <!-- Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
-            <h2 class="section-title">Mes Projets</h2>
+            <h2 class="section-title animate-on-scroll">Mes Projets</h2>
             <div class="project-filters">
                 <button class="filter-btn active" data-filter="all">Tous</button>
                 <button class="filter-btn" data-filter="web">Web</button>
@@ -95,17 +104,55 @@
             </div>
             <div class="projects-grid" id="projects-grid">
                 <!-- Projects will be loaded dynamically -->
-                <div class="project-card glass-card" data-category="web">
+                <div class="project-card glass-card animate-on-scroll" data-category="web">
                     <div class="project-image">
                         <div class="placeholder-image">📱</div>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">Projet Demo</h3>
-                        <p class="project-description">Description du projet de démonstration</p>
+                        <p class="project-description">Description du projet de démonstration avec animations avancées</p>
                         <div class="project-tech">
                             <span class="tech-tag">HTML</span>
                             <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">JS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Vite</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Demo</a>
+                            <a href="#" class="project-link">Code</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card glass-card animate-on-scroll" data-category="web">
+                    <div class="project-image">
+                        <div class="placeholder-image">⚛️</div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">App React</h3>
+                        <p class="project-description">Application React moderne avec hooks et context</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">Styled Components</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Demo</a>
+                            <a href="#" class="project-link">Code</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card glass-card animate-on-scroll" data-category="api">
+                    <div class="project-image">
+                        <div class="placeholder-image">🚀</div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">API Node.js</h3>
+                        <p class="project-description">API RESTful avec Express et MongoDB</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">Express</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">JWT</span>
                         </div>
                         <div class="project-links">
                             <a href="#" class="project-link">Demo</a>
@@ -120,9 +167,9 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">Contactez-moi</h2>
+            <h2 class="section-title animate-on-scroll">Contactez-moi</h2>
             <div class="contact-content">
-                <div class="contact-info glass-card">
+                <div class="contact-info glass-card animate-on-scroll">
                     <h3>Discutons de votre projet</h3>
                     <p>Je suis toujours intéressé par de nouveaux défis et collaborations.</p>
                     <div class="contact-methods">
@@ -134,9 +181,13 @@
                             <span class="contact-icon">💼</span>
                             <span>LinkedIn</span>
                         </div>
+                        <div class="contact-method">
+                            <span class="contact-icon">📱</span>
+                            <span>+33 1 23 45 67 89</span>
+                        </div>
                     </div>
                 </div>
-                <form class="contact-form glass-card" id="contact-form">
+                <form class="contact-form glass-card animate-on-scroll" id="contact-form">
                     <div class="form-group">
                         <label for="name">Nom</label>
                         <input type="text" id="name" name="name" required>
@@ -149,7 +200,9 @@
                         <label for="message">Message</label>
                         <textarea id="message" name="message" rows="5" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                    <button type="submit" class="btn btn-primary">
+                        <span>Envoyer</span>
+                    </button>
                 </form>
             </div>
         </div>
@@ -158,7 +211,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Portfolio. Créé avec ❤️ et Vite.js</p>
+            <p>&copy; 2024 Portfolio. Créé avec ❤️ et des animations CSS avancées</p>
         </div>
     </footer>
 
@@ -167,6 +220,7 @@
     <script type="module" src="/js/theme-toggle.js"></script>
     <script type="module" src="/js/project-filter.js"></script>
     <script type="module" src="/js/animations.js"></script>
+    <script type="module" src="/js/hero-animations.js"></script>
     <script type="module" src="/js/contact-form.js"></script>
 </body>
 </html>

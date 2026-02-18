@@ -1,8 +1,9 @@
-// Animations with Intersection Observer
+// Enhanced Animations with Intersection Observer
 
 document.addEventListener('DOMContentLoaded', function() {
     initScrollAnimations();
     initParallaxEffects();
+    initAnimateOnScrollElements();
 });
 
 function initScrollAnimations() {
@@ -23,8 +24,8 @@ function initScrollAnimations() {
         });
     }, observerOptions);
     
-    // Observe all glass cards
-    const glassCards = document.querySelectorAll('.glass-card');
+    // Observe all glass cards (except hero which is handled separately)
+    const glassCards = document.querySelectorAll('.glass-card:not(.hero .glass-card)');
     glassCards.forEach(card => {
         observer.observe(card);
     });
@@ -36,6 +37,52 @@ function initScrollAnimations() {
     });
     
     console.log('✅ Scroll animations initialized');
+}
+
+function initAnimateOnScrollElements() {
+    // Handle elements with animate-on-scroll class
+    const animateElements = document.querySelectorAll('.animate-on-scroll');
+    
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -10% 0px'
+    };
+    
+    const animateObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Determine animation type based on element
+                let animationClass = 'fadeInUp';
+                
+                if (entry.target.classList.contains('project-card')) {
+                    animationClass = 'scaleIn';
+                } else if (entry.target.classList.contains('section-title')) {
+                    animationClass = 'fadeInDown';
+                } else if (entry.target.classList.contains('contact-info')) {
+                    animationClass = 'fadeInLeft';
+                } else if (entry.target.classList.contains('contact-form')) {
+                    animationClass = 'fadeInRight';
+                }
+                
+                // Add staggered delay for grid items
+                const isGridItem = entry.target.closest('.projects-grid');
+                if (isGridItem) {
+                    const gridItems = Array.from(isGridItem.children);
+                    const index = gridItems.indexOf(entry.target);
+                    entry.target.style.animationDelay = `${index * 150}ms`;
+                }
+                
+                entry.target.classList.add(animationClass);
+                animateObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    animateElements.forEach(element => {
+        animateObserver.observe(element);
+    });
+    
+    console.log('✅ Animate-on-scroll elements initialized');
 }
 
 function initParallaxEffects() {
@@ -55,7 +102,10 @@ function initParallaxEffects() {
                 const yPos = scrolled * speed;
                 const rotation = scrolled * (0.1 + index * 0.05);
                 
-                shape.style.transform = `translateY(${yPos}px) rotate(${rotation}deg)`;
+                // Don't override hero-animations.js transforms
+                if (!shape.style.transform.includes('scale')) {
+                    shape.style.transform = `translateY(${yPos}px) rotate(${rotation}deg)`;
+                }
             });
         }
     }
@@ -71,7 +121,7 @@ function initParallaxEffects() {
         }
     }
     
-    window.addEventListener('scroll', requestTick);
+    window.addEventListener('scroll', requestTick, { passive: true });
     
     console.log('✅ Parallax effects initialized');
 }
@@ -158,34 +208,86 @@ function typewriterEffect(element, text, speed = 50) {
     observer.observe(element);
 }
 
-// Add CSS animations
-const animationStyles = `
+// Reveal animations on scroll
+function revealOnScroll() {
+    const reveals = document.querySelectorAll('.reveal');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -10% 0px'
+    });
+    
+    reveals.forEach(reveal => {
+        observer.observe(reveal);
+    });
+}
+
+// Enhanced CSS animations
+const enhancedAnimationStyles = `
     .fadeInUp {
         opacity: 0;
+        transform: translateY(30px);
         animation: fadeInUp 0.8s ease forwards;
+    }
+    
+    .fadeInDown {
+        opacity: 0;
+        transform: translateY(-30px);
+        animation: fadeInDown 0.8s ease forwards;
     }
     
     .fadeInLeft {
         opacity: 0;
+        transform: translateX(-40px);
         animation: fadeInLeft 0.8s ease forwards;
     }
     
     .fadeInRight {
         opacity: 0;
+        transform: translateX(40px);
         animation: fadeInRight 0.8s ease forwards;
     }
     
     .scaleIn {
         opacity: 0;
-        transform: scale(0.8);
-        animation: scaleIn 0.6s ease forwards;
+        transform: scale(0.8) translateY(20px);
+        animation: scaleIn 0.7s ease forwards;
     }
     
+    .slideInUp {
+        opacity: 0;
+        transform: translateY(50px);
+        animation: slideInUp 0.6s ease forwards;
+    }
+    
+    .bounceIn {
+        opacity: 0;
+        transform: scale(0.3);
+        animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    }
+    
+    .rotateIn {
+        opacity: 0;
+        transform: rotate(-10deg) scale(0.8);
+        animation: rotateIn 0.8s ease forwards;
+    }
+    
+    /* Keyframe animations */
     @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
+        to {
+            opacity: 1;
+            transform: translateY(0);
         }
+    }
+    
+    @keyframes fadeInDown {
         to {
             opacity: 1;
             transform: translateY(0);
@@ -193,10 +295,6 @@ const animationStyles = `
     }
     
     @keyframes fadeInLeft {
-        from {
-            opacity: 0;
-            transform: translateX(-30px);
-        }
         to {
             opacity: 1;
             transform: translateX(0);
@@ -204,10 +302,6 @@ const animationStyles = `
     }
     
     @keyframes fadeInRight {
-        from {
-            opacity: 0;
-            transform: translateX(30px);
-        }
         to {
             opacity: 1;
             transform: translateX(0);
@@ -215,32 +309,145 @@ const animationStyles = `
     }
     
     @keyframes scaleIn {
-        from {
-            opacity: 0;
-            transform: scale(0.8);
-        }
         to {
             opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+    
+    @keyframes slideInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes bounceIn {
+        0% {
+            opacity: 0;
+            transform: scale(0.3);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        70% {
+            transform: scale(0.9);
+        }
+        100% {
+            opacity: 1;
             transform: scale(1);
+        }
+    }
+    
+    @keyframes rotateIn {
+        to {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+    }
+    
+    /* Reveal animations */
+    .reveal {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.8s ease;
+    }
+    
+    .reveal.revealed {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    /* Staggered animations */
+    .stagger-animation > *:nth-child(1) { animation-delay: 0.1s; }
+    .stagger-animation > *:nth-child(2) { animation-delay: 0.2s; }
+    .stagger-animation > *:nth-child(3) { animation-delay: 0.3s; }
+    .stagger-animation > *:nth-child(4) { animation-delay: 0.4s; }
+    .stagger-animation > *:nth-child(5) { animation-delay: 0.5s; }
+    .stagger-animation > *:nth-child(6) { animation-delay: 0.6s; }
+    
+    /* Hover animations */
+    .hover-float:hover {
+        transform: translateY(-5px);
+        transition: transform 0.3s ease;
+    }
+    
+    .hover-scale:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease;
+    }
+    
+    .hover-rotate:hover {
+        transform: rotate(5deg);
+        transition: transform 0.3s ease;
+    }
+    
+    /* Loading animations */
+    .loading {
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.5;
+        }
+        100% {
+            opacity: 1;
         }
     }
     
     /* Reduced motion support */
     @media (prefers-reduced-motion: reduce) {
         .fadeInUp,
+        .fadeInDown,
         .fadeInLeft,
         .fadeInRight,
-        .scaleIn {
+        .scaleIn,
+        .slideInUp,
+        .bounceIn,
+        .rotateIn,
+        .reveal {
             animation: none;
             opacity: 1;
             transform: none;
+            transition: none;
         }
+        
+        .hover-float:hover,
+        .hover-scale:hover,
+        .hover-rotate:hover {
+            transform: none;
+        }
+        
+        .loading {
+            animation: none;
+        }
+    }
+    
+    /* Performance optimizations */
+    .animate-on-scroll {
+        will-change: transform, opacity;
+    }
+    
+    .animate-on-scroll.fadeInUp,
+    .animate-on-scroll.fadeInDown,
+    .animate-on-scroll.fadeInLeft,
+    .animate-on-scroll.fadeInRight,
+    .animate-on-scroll.scaleIn {
+        will-change: auto;
     }
 `;
 
-// Add styles to head
-const styleSheet = document.createElement('style');
-styleSheet.textContent = animationStyles;
-document.head.appendChild(styleSheet);
+// Add enhanced styles to head
+const enhancedStyleSheet = document.createElement('style');
+enhancedStyleSheet.textContent = enhancedAnimationStyles;
+document.head.appendChild(enhancedStyleSheet);
 
-export { animateOnScroll, staggeredAnimation, animateCounter, typewriterEffect };
+// Initialize reveal animations
+document.addEventListener('DOMContentLoaded', revealOnScroll);
+
+export { animateOnScroll, staggeredAnimation, animateCounter, typewriterEffect, revealOnScroll };

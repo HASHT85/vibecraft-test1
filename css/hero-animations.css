@@ -1,0 +1,436 @@
+/* Hero Section Advanced Animations */
+
+/* Main Hero Container Animation */
+.hero {
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+              radial-gradient(circle at 40% 80%, rgba(120, 199, 255, 0.3) 0%, transparent 50%);
+  opacity: 0;
+  animation: gradientReveal 2s ease-out 0.5s forwards;
+}
+
+@keyframes gradientReveal {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Hero Content Animations */
+.hero-content {
+  opacity: 0;
+  transform: translateY(50px);
+  animation: heroContentReveal 1.2s ease-out 0.3s forwards;
+}
+
+@keyframes heroContentReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Advanced Title Animation */
+.hero-title {
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-title .word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(100px) rotateX(-90deg);
+  animation: wordReveal 0.8s ease-out forwards;
+}
+
+.hero-title .word:nth-child(1) { animation-delay: 0.8s; }
+.hero-title .word:nth-child(2) { animation-delay: 1s; }
+.hero-title .word:nth-child(3) { animation-delay: 1.2s; }
+.hero-title .word:nth-child(4) { animation-delay: 1.4s; }
+
+@keyframes wordReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+}
+
+/* Highlight Animation */
+.hero-title .highlight {
+  position: relative;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-title .highlight::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: highlightSweep 2s ease-in-out 2s infinite;
+}
+
+@keyframes highlightSweep {
+  0% { width: 0; left: 0; }
+  50% { width: 100%; left: 0; }
+  100% { width: 0; left: 100%; }
+}
+
+/* Description Animation */
+.hero-description {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: descriptionReveal 1s ease-out 1.8s forwards;
+}
+
+@keyframes descriptionReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Actions Animation */
+.hero-actions {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: actionsReveal 1s ease-out 2.2s forwards;
+}
+
+@keyframes actionsReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-actions .btn {
+  transform: scale(0.9);
+  animation: buttonPop 0.6s ease-out forwards;
+}
+
+.hero-actions .btn:nth-child(1) {
+  animation-delay: 2.4s;
+}
+
+.hero-actions .btn:nth-child(2) {
+  animation-delay: 2.6s;
+}
+
+@keyframes buttonPop {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Enhanced Floating Shapes */
+.floating-shapes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  filter: blur(1px);
+  animation: shapeReveal 2s ease-out forwards, floatAdvanced 20s infinite ease-in-out;
+}
+
+.shape-1 {
+  width: 240px;
+  height: 240px;
+  background: var(--gradient-primary);
+  top: 15%;
+  left: 5%;
+  animation-delay: 1s, 1s;
+}
+
+.shape-2 {
+  width: 180px;
+  height: 180px;
+  background: var(--gradient-secondary);
+  top: 55%;
+  right: 15%;
+  animation-delay: 1.5s, 6s;
+}
+
+.shape-3 {
+  width: 120px;
+  height: 120px;
+  background: var(--gradient-accent);
+  bottom: 25%;
+  left: 65%;
+  animation-delay: 2s, 11s;
+}
+
+.shape-4 {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+  top: 25%;
+  right: 40%;
+  animation-delay: 2.5s, 16s;
+}
+
+.shape-5 {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(45deg, #4ecdc4, #44a08d);
+  bottom: 45%;
+  left: 20%;
+  animation-delay: 3s, 3s;
+}
+
+@keyframes shapeReveal {
+  to {
+    opacity: 0.08;
+  }
+}
+
+@keyframes floatAdvanced {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateY(-40px) translateX(20px) rotate(90deg) scale(1.1);
+  }
+  50% {
+    transform: translateY(-20px) translateX(-30px) rotate(180deg) scale(0.9);
+  }
+  75% {
+    transform: translateY(30px) translateX(10px) rotate(270deg) scale(1.05);
+  }
+}
+
+/* Particle Effects */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20px 80px, rgba(120, 119, 198, 0.3) 2px, transparent 2px),
+    radial-gradient(circle at 80px 20px, rgba(255, 119, 198, 0.3) 1px, transparent 1px),
+    radial-gradient(circle at 40px 40px, rgba(120, 199, 255, 0.3) 1.5px, transparent 1.5px);
+  background-size: 100px 100px, 80px 80px, 120px 120px;
+  opacity: 0;
+  animation: particlesReveal 3s ease-out 2s forwards, particlesFloat 10s infinite linear;
+}
+
+@keyframes particlesReveal {
+  to {
+    opacity: 0.4;
+  }
+}
+
+@keyframes particlesFloat {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  100% {
+    transform: translateX(-100px) translateY(-100px);
+  }
+}
+
+/* Glass Card Enhancement for Hero */
+.hero .glass-card {
+  position: relative;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 20px 50px 0 rgba(31, 38, 135, 0.37),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.hero .glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+  opacity: 0;
+  animation: glassShimmer 3s ease-in-out 3s infinite;
+}
+
+@keyframes glassShimmer {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  animation: scrollIndicatorReveal 1s ease-out 3s forwards;
+}
+
+.scroll-indicator::before {
+  content: '';
+  display: block;
+  width: 2px;
+  height: 30px;
+  background: var(--text-secondary);
+  margin: 0 auto 10px;
+  opacity: 0.5;
+  animation: scrollLine 2s infinite ease-in-out;
+}
+
+.scroll-indicator::after {
+  content: '↓';
+  display: block;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  text-align: center;
+  animation: scrollBounce 2s infinite ease-in-out;
+}
+
+@keyframes scrollIndicatorReveal {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scrollLine {
+  0%, 100% {
+    transform: scaleY(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scaleY(1.5);
+    opacity: 0.8;
+  }
+}
+
+@keyframes scrollBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+/* Interactive Elements */
+.hero-interactive-area {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(120, 119, 198, 0.1) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0;
+  animation: interactiveAreaReveal 1s ease-out 4s forwards;
+}
+
+.hero-interactive-area:hover {
+  transform: translate(-50%, -50%) scale(1.5);
+  background: radial-gradient(circle, rgba(120, 119, 198, 0.2) 0%, transparent 70%);
+}
+
+@keyframes interactiveAreaReveal {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive Animations */
+@media (max-width: 768px) {
+  .hero-title .word {
+    transform: translateY(50px) rotateX(-45deg);
+  }
+  
+  .shape {
+    display: none;
+  }
+  
+  .shape-1, .shape-2 {
+    display: block;
+  }
+  
+  .hero::after {
+    opacity: 0.2;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .hero::before,
+  .hero-content,
+  .hero-title .word,
+  .hero-description,
+  .hero-actions,
+  .shape,
+  .hero::after,
+  .scroll-indicator {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .hero .glass-card::before {
+    display: none;
+  }
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .hero::before {
+  background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.2) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.2) 0%, transparent 50%),
+              radial-gradient(circle at 40% 80%, rgba(120, 199, 255, 0.2) 0%, transparent 50%);
+}
+
+[data-theme="dark"] .hero::after {
+  background-image: 
+    radial-gradient(circle at 20px 80px, rgba(120, 119, 198, 0.2) 2px, transparent 2px),
+    radial-gradient(circle at 80px 20px, rgba(255, 119, 198, 0.2) 1px, transparent 1px),
+    radial-gradient(circle at 40px 40px, rgba(120, 199, 255, 0.2) 1.5px, transparent 1.5px);
+}
+
+[data-theme="dark"] .shape {
+  opacity: 0.05;
+}

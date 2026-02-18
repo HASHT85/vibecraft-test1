@@ -9,11 +9,17 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^5.0.0",
-    "postcss": "^8.4.32",
-    "autoprefixer": "^10.4.16"
+    "autoprefixer": "^10.4.24",
+    "postcss": "^8.5.6",
+    "vite": "^5.4.21"
   },
-  "keywords": ["portfolio", "vite", "glassmorphism", "vanilla-js"],
+  "keywords": [
+    "portfolio",
+    "vite",
+    "glassmorphism",
+    "vanilla-js"
+  ],
   "author": "Portfolio Owner",
-  "license": "MIT"
+  "license": "MIT",
+  "main": "vite.config.js"
 }

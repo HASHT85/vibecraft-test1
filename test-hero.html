@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Hero Section - Animations</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/glassmorphism.css">
+    <link rel="stylesheet" href="css/hero-animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <style>
+        /* Test specific styles */
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .test-section {
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-secondary);
+        }
+        
+        .test-content {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .debug-info {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h2>Test Hero</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="#hero" class="nav-link">Hero</a>
+                <a href="#test" class="nav-link">Test</a>
+                <button class="theme-toggle" aria-label="Basculer le thème">🌙</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Advanced Animations -->
+    <section id="hero" class="hero">
+        <div class="hero-content glass-card">
+            <h1 class="hero-title">Bonjour, je suis Développeur Full Stack</h1>
+            <p class="hero-description" data-typewriter="Passionné par les technologies web modernes et l'innovation" data-speed="60">Passionné par les technologies web modernes et l'innovation</p>
+            <div class="hero-actions">
+                <a href="#test" class="btn btn-primary">
+                    <span>Voir le test</span>
+                </a>
+                <a href="#test" class="btn btn-secondary">
+                    <span>En savoir plus</span>
+                </a>
+            </div>
+        </div>
+        <div class="hero-background">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+                <div class="shape shape-5"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Test Section -->
+    <section id="test" class="test-section">
+        <div class="test-content glass-card animate-on-scroll">
+            <h2>Test des animations</h2>
+            <p>Cette section teste les animations avec Intersection Observer.</p>
+            <div class="stagger-animation">
+                <div class="skill-tag animate-on-scroll">JavaScript</div>
+                <div class="skill-tag animate-on-scroll">CSS Animations</div>
+                <div class="skill-tag animate-on-scroll">Intersection Observer</div>
+                <div class="skill-tag animate-on-scroll">Keyframes</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Another Test Section -->
+    <section class="test-section">
+        <div class="test-content glass-card animate-on-scroll">
+            <h3>Animation de compteur</h3>
+            <div id="counter" style="font-size: 3rem; font-weight: bold;">0</div>
+            <p>Ce compteur s'anime quand il entre dans la vue</p>
+        </div>
+    </section>
+
+    <!-- Debug Info -->
+    <div class="debug-info">
+        <div id="scroll-info">Scroll: 0px</div>
+        <div id="hero-status">Hero: loading</div>
+        <div id="animations-status">Animations: loading</div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module">
+        // Debug information
+        function updateDebugInfo() {
+            document.getElementById('scroll-info').textContent = `Scroll: ${window.pageYOffset}px`;
+            
+            // Check if hero animations are loaded
+            if (window.heroAnimations) {
+                document.getElementById('hero-status').textContent = 'Hero: ✅ loaded';
+            }
+            
+            // Check if general animations are loaded
+            const animatedElements = document.querySelectorAll('.fadeInUp, .scaleIn, .fadeInLeft');
+            document.getElementById('animations-status').textContent = `Animations: ${animatedElements.length} active`;
+        }
+        
+        window.addEventListener('scroll', updateDebugInfo);
+        setInterval(updateDebugInfo, 1000);
+        
+        // Test counter animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const counterElement = document.getElementById('counter');
+            if (counterElement) {
+                // Import and use counter animation
+                import('./js/animations.js').then(module => {
+                    module.animateCounter(counterElement, 0, 150, 2000);
+                });
+            }
+        });
+    </script>
+    
+    <!-- Main scripts -->
+    <script type="module" src="js/animations.js"></script>
+    <script type="module" src="js/hero-animations.js"></script>
+    <script type="module">
+        // Simple theme toggle for testing
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.querySelector('.theme-toggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    const currentTheme = document.documentElement.getAttribute('data-theme');
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    document.documentElement.setAttribute('data-theme', newTheme);
+                    themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
