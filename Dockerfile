@@ -55,12 +55,12 @@ RUN rm /etc/nginx/conf.d/default.conf.original 2>/dev/null || true
 # Copy built application from builder stage
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Copy additional static files if they exist
-COPY --from=builder /app/robots.txt /usr/share/nginx/html/ 2>/dev/null || true
-COPY --from=builder /app/sitemap.xml /usr/share/nginx/html/ 2>/dev/null || true
-COPY --from=builder /app/manifest.json /usr/share/nginx/html/ 2>/dev/null || true
-COPY --from=builder /app/sw.js /usr/share/nginx/html/ 2>/dev/null || true
-COPY --from=builder /app/favicon.svg /usr/share/nginx/html/ 2>/dev/null || true
+# Copy additional static files
+COPY --from=builder /app/robots.txt /usr/share/nginx/html/
+COPY --from=builder /app/sitemap.xml /usr/share/nginx/html/
+COPY --from=builder /app/manifest.json /usr/share/nginx/html/
+COPY --from=builder /app/sw.js /usr/share/nginx/html/
+COPY --from=builder /app/favicon.svg /usr/share/nginx/html/
 
 # Verify files are properly copied
 RUN echo "Production files:" && \
