@@ -3,13 +3,16 @@
 # Build stage
 FROM node:18-alpine AS builder
 
+# Install curl for healthcheck
+RUN apk add --no-cache curl
+
 WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci --only=production
+# Install ALL dependencies (including devDependencies needed for build)
+RUN npm ci
 
 # Copy source code
 COPY . .
@@ -19,6 +22,9 @@ RUN npm run build
 
 # Production stage
 FROM nginx:alpine AS production
+
+# Install curl for healthcheck
+RUN apk add --no-cache curl
 
 # Copy custom nginx config
 COPY nginx.conf /etc/nginx/conf.d/default.conf
