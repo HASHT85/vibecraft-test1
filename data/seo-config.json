@@ -1,0 +1,96 @@
+{
+  "site": {
+    "name": "Portfolio - Développeur Web",
+    "url": "https://portfolio.dev",
+    "domain": "portfolio.dev",
+    "language": "fr",
+    "locale": "fr_FR",
+    "charset": "UTF-8"
+  },
+  "meta": {
+    "defaultTitle": "Portfolio - Développeur Web",
+    "titleTemplate": "%s | Portfolio",
+    "defaultDescription": "Portfolio professionnel de développeur full-stack spécialisé en JavaScript, React, Node.js et technologies web modernes.",
+    "defaultKeywords": [
+      "développeur",
+      "portfolio",
+      "web",
+      "javascript",
+      "typescript",
+      "react",
+      "nodejs",
+      "frontend",
+      "backend",
+      "fullstack",
+      "css",
+      "html",
+      "git",
+      "api",
+      "responsive",
+      "performance"
+    ]
+  },
+  "openGraph": {
+    "type": "website",
+    "siteName": "Portfolio - Développeur Web",
+    "defaultImage": "/assets/images/og-default.jpg",
+    "imageWidth": 1200,
+    "imageHeight": 630,
+    "imageAlt": "Portfolio Alexandre Développeur"
+  },
+  "twitter": {
+    "cardType": "summary_large_image",
+    "site": "@portfolio_dev",
+    "creator": "@portfolio_dev"
+  },
+  "structuredData": {
+    "organizationName": "Portfolio Dev",
+    "personName": "Alexandre Développeur",
+    "jobTitle": "Développeur Full Stack",
+    "worksFor": "Freelance",
+    "nationality": "French",
+    "address": {
+      "locality": "Paris",
+      "country": "France"
+    }
+  },
+  "performance": {
+    "preconnect": [
+      "https://fonts.googleapis.com",
+      "https://fonts.gstatic.com"
+    ],
+    "dnsPrefetch": [
+      "https://api.github.com",
+      "https://cdn.jsdelivr.net",
+      "https://unpkg.com"
+    ]
+  },
+  "security": {
+    "contentSecurityPolicy": {
+      "defaultSrc": ["'self'"],
+      "scriptSrc": ["'self'", "'unsafe-inline'", "https:"],
+      "styleSrc": ["'self'", "'unsafe-inline'", "https:"],
+      "imgSrc": ["'self'", "data:", "https:"],
+      "connectSrc": ["'self'", "https:"],
+      "fontSrc": ["'self'", "https:"],
+      "frameSrc": ["'none'"]
+    }
+  },
+  "sitemap": {
+    "changefreq": {
+      "homepage": "weekly",
+      "about": "monthly",
+      "projects": "weekly",
+      "contact": "monthly",
+      "projectDetail": "monthly"
+    },
+    "priority": {
+      "homepage": 1.0,
+      "about": 0.8,
+      "projects": 0.9,
+      "contact": 0.7,
+      "projectDetail": 0.6,
+      "categoryFilter": 0.5
+    }
+  }
+}

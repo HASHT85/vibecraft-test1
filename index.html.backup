@@ -3,53 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO Meta Tags (seront mis à jour dynamiquement) -->
     <meta name="description" content="Portfolio de développeur - Technologies modernes et projets innovants">
-    <meta name="keywords" content="développeur, portfolio, web, javascript, frontend, backend, fullstack">
-    <meta name="author" content="Alexandre Développeur">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="French">
-    <meta name="revisit-after" content="7 days">
+    <meta name="keywords" content="développeur, portfolio, web, javascript, frontend">
+    <meta name="author" content="Portfolio Owner">
     
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://portfolio.dev/">
+    <!-- Open Graph -->
     <meta property="og:title" content="Portfolio - Développeur Web">
-    <meta property="og:description" content="Découvrez mes projets et compétences en développement web moderne. Spécialisé en JavaScript, React, Node.js et technologies cloud.">
-    <meta property="og:image" content="https://portfolio.dev/assets/images/og-default.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Portfolio Alexandre Développeur">
-    <meta property="og:site_name" content="Portfolio - Développeur Web">
-    <meta property="og:locale" content="fr_FR">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://portfolio.dev/">
-    <meta name="twitter:title" content="Portfolio - Développeur Web">
-    <meta name="twitter:description" content="Découvrez mes projets et compétences en développement web moderne. Spécialisé en JavaScript, React, Node.js et technologies cloud.">
-    <meta name="twitter:image" content="https://portfolio.dev/assets/images/og-default.jpg">
-    <meta name="twitter:creator" content="@portfolio_dev">
-    <meta name="twitter:site" content="@portfolio_dev">
-    
-    <!-- Additional SEO -->
-    <meta name="theme-color" content="#6366f1">
-    <meta name="msapplication-TileColor" content="#6366f1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Portfolio">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://portfolio.dev/">
+    <meta property="og:description" content="Découvrez mes projets et compétences en développement web">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://monportfolio.com">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
-    
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://api.github.com">
     
     <title>Portfolio - Développeur Web</title>
     
@@ -60,10 +25,6 @@
     <link rel="stylesheet" href="/css/animations.css">
     <link rel="stylesheet" href="/css/hero-animations.css">
     <link rel="stylesheet" href="/css/about-section.css">
-    <link rel="stylesheet" href="/css/contact-form.css">
-    <link rel="stylesheet" href="/css/responsive.css">
-</head>
-<body>
     <link rel="stylesheet" href="/css/contact-form.css">
     <link rel="stylesheet" href="/css/responsive.css">
 </head>
@@ -352,7 +313,5 @@
     <script src="/js/about-section.js"></script>
     <script src="/js/project-filter.js"></script>
     <script src="/js/contact-form.js"></script>
-    <script src="/js/seo-meta.js"></script>
-    <script src="/js/sitemap-generator.js"></script>
 </body>
 </html>

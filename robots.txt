@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://portfolio.dev/sitemap.xml
+
+# Crawling rules
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /assets/private/
+
+# Cache files
+Disallow: /*.map$
+Disallow: /vite.config.js
+Disallow: /package.json
+Disallow: /package-lock.json
+
+# Development files
+Disallow: /test-*
+Disallow: /*.cjs
+Disallow: /*.mjs
