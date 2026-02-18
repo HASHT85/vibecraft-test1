@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Formulaire de Contact</title>
+    <link rel="stylesheet" href="/css/themes.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/glassmorphism.css">
+    <link rel="stylesheet" href="/css/contact-form.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .test-container {
+            max-width: 800px;
+            width: 100%;
+        }
+        .test-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+        }
+        .contact-content {
+            display: block;
+        }
+        .contact-form {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-header">
+            <h1>Test du Formulaire de Contact</h1>
+            <p>Testez la validation côté client avec différentes données</p>
+        </div>
+        
+        <div class="contact-content">
+            <form class="contact-form glass-card" id="contact-form" novalidate>
+                <h2>Contactez-moi</h2>
+                <div class="form-group">
+                    <label for="name">Nom complet *</label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        required 
+                        autocomplete="name"
+                        aria-describedby="name-error"
+                        minlength="2"
+                        maxlength="50"
+                        placeholder="Votre nom complet">
+                </div>
+                <div class="form-group">
+                    <label for="email">Adresse email *</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        required 
+                        autocomplete="email"
+                        aria-describedby="email-error"
+                        placeholder="votre@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="subject">Sujet</label>
+                    <input 
+                        type="text" 
+                        id="subject" 
+                        name="subject" 
+                        autocomplete="off"
+                        maxlength="100"
+                        placeholder="Sujet de votre message">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea 
+                        id="message" 
+                        name="message" 
+                        rows="6" 
+                        required 
+                        aria-describedby="message-error"
+                        minlength="10"
+                        maxlength="1000"
+                        placeholder="Décrivez votre projet, vos besoins ou toute question..."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <span>Envoyer le message</span>
+                    </button>
+                    <button type="reset" class="btn btn-secondary">
+                        <span>Effacer</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div style="margin-top: 2rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 8px; color: white;">
+            <h3>Instructions de test :</h3>
+            <ul>
+                <li>Laissez des champs requis vides pour voir les erreurs</li>
+                <li>Entrez un email invalide (ex: "test")</li>
+                <li>Entrez un nom avec des caractères spéciaux</li>
+                <li>Écrivez un message trop court (moins de 10 caractères)</li>
+                <li>Tapez dans le champ message pour voir le compteur de caractères</li>
+                <li>Utilisez le bouton "Effacer" pour reset le formulaire</li>
+            </ul>
+        </div>
+    </div>
+
+    <script type="module" src="/js/contact-form.js"></script>
+</body>
+</html>

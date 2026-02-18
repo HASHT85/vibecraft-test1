@@ -418,6 +418,31 @@ section {
   border-color: var(--text-accent);
 }
 
+/* Form Actions */
+.form-actions {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-top: var(--space-lg);
+}
+
+.form-actions .btn {
+  min-width: 140px;
+}
+
+.form-actions .btn[type="reset"] {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 2px solid var(--border-color);
+}
+
+.form-actions .btn[type="reset"]:hover {
+  background: var(--text-secondary);
+  color: white;
+  border-color: var(--text-secondary);
+}
+
 /* Footer */
 .footer {
   background: var(--bg-primary);
