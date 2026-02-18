@@ -4,9 +4,9 @@
   "description": "Portfolio minimal avec Vite.js et glassmorphism",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
+    "dev": "npx vite",
+    "build": "npx vite build",
+    "preview": "npx vite preview",
     "docker:build": "chmod +x scripts/docker-build.sh && ./scripts/docker-build.sh",
     "docker:validate": "chmod +x scripts/validate-docker.sh && ./scripts/validate-docker.sh",
     "docker:deploy": "chmod +x scripts/deploy.sh && ./scripts/deploy.sh",
