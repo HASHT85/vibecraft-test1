@@ -1,0 +1,466 @@
+/**
+ * PWA Styles - Bannières et notifications PWA
+ */
+
+/* === Variables PWA === */
+:root {
+    --pwa-primary: var(--primary-color);
+    --pwa-success: #10b981;
+    --pwa-warning: #f59e0b;
+    --pwa-error: #ef4444;
+    --pwa-info: #3b82f6;
+    
+    --pwa-banner-bg: var(--glass-bg);
+    --pwa-banner-border: var(--glass-border);
+    --pwa-shadow: var(--shadow-md);
+    
+    --pwa-z-banner: 9999;
+    --pwa-z-toast: 10000;
+}
+
+/* === Bannières PWA === */
+.pwa-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    width: calc(100% - 40px);
+    max-width: 480px;
+    z-index: var(--pwa-z-banner);
+    
+    background: var(--pwa-banner-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--pwa-banner-border);
+    border-radius: 16px;
+    box-shadow: var(--pwa-shadow);
+    
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Prevent interaction when hidden */
+    pointer-events: none;
+    opacity: 0;
+}
+
+.pwa-banner.slide-in {
+    transform: translateX(-50%) translateY(0);
+    pointer-events: all;
+    opacity: 1;
+}
+
+.pwa-banner.hidden {
+    transform: translateX(-50%) translateY(100%);
+    pointer-events: none;
+    opacity: 0;
+}
+
+.pwa-banner-content {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.pwa-banner-text h4 {
+    margin: 0 0 4px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.pwa-banner-text p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.pwa-banner-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+/* === Boutons PWA === */
+.pwa-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.pwa-btn-install,
+.pwa-btn-update {
+    background: var(--pwa-primary);
+    color: white;
+}
+
+.pwa-btn-install:hover,
+.pwa-btn-update:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+.pwa-btn-dismiss {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+}
+
+.pwa-btn-dismiss:hover {
+    background: var(--bg-secondary);
+    color: var(--text-color);
+}
+
+.pwa-btn:active {
+    transform: translateY(0);
+}
+
+/* === Bannière d'installation === */
+.pwa-install-banner .pwa-banner-text h4 {
+    color: var(--pwa-primary);
+}
+
+.pwa-install-banner::before {
+    content: '📱';
+    position: absolute;
+    top: -8px;
+    left: 20px;
+    font-size: 1.5rem;
+    background: var(--bg-color);
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: 1px solid var(--pwa-banner-border);
+}
+
+/* === Bannière de mise à jour === */
+.pwa-update-banner .pwa-banner-text h4 {
+    color: var(--pwa-success);
+}
+
+.pwa-update-banner::before {
+    content: '🔄';
+    position: absolute;
+    top: -8px;
+    left: 20px;
+    font-size: 1.5rem;
+    background: var(--bg-color);
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: 1px solid var(--pwa-banner-border);
+}
+
+/* === Toast Notifications === */
+.pwa-toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: var(--pwa-z-toast);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 320px;
+}
+
+.pwa-toast {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    
+    transform: translateX(100%);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    min-width: 280px;
+}
+
+.pwa-toast.pwa-toast-show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.pwa-toast-content {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pwa-toast-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.pwa-toast-message {
+    font-size: 0.875rem;
+    color: var(--text-color);
+    line-height: 1.4;
+}
+
+/* === Toast Types === */
+.pwa-toast-success {
+    border-left: 4px solid var(--pwa-success);
+}
+
+.pwa-toast-error {
+    border-left: 4px solid var(--pwa-error);
+}
+
+.pwa-toast-warning {
+    border-left: 4px solid var(--pwa-warning);
+}
+
+.pwa-toast-info {
+    border-left: 4px solid var(--pwa-info);
+}
+
+/* === Status Indicator === */
+.pwa-status {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    z-index: var(--pwa-z-banner);
+    
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 8px 12px;
+    
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.pwa-status.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.pwa-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--pwa-success);
+    animation: pulse 2s infinite;
+}
+
+.pwa-status.offline .pwa-status-dot {
+    background: var(--pwa-error);
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* === Debug Panel (Development) === */
+.pwa-debug {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    max-width: 280px;
+    z-index: var(--pwa-z-banner);
+    
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.pwa-debug.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.pwa-debug h4 {
+    margin: 0 0 8px 0;
+    color: var(--text-color);
+    font-size: 0.875rem;
+}
+
+.pwa-debug ul {
+    margin: 0;
+    padding-left: 16px;
+    list-style: disc;
+}
+
+.pwa-debug li {
+    margin-bottom: 4px;
+}
+
+.pwa-debug .status-good {
+    color: var(--pwa-success);
+}
+
+.pwa-debug .status-warning {
+    color: var(--pwa-warning);
+}
+
+.pwa-debug .status-error {
+    color: var(--pwa-error);
+}
+
+/* === Responsive Design === */
+@media (max-width: 768px) {
+    .pwa-banner {
+        bottom: 10px;
+        width: calc(100% - 20px);
+        left: 50%;
+    }
+    
+    .pwa-banner-content {
+        padding: 16px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+    
+    .pwa-banner-actions {
+        justify-content: center;
+    }
+    
+    .pwa-btn {
+        flex: 1;
+        max-width: 120px;
+    }
+    
+    .pwa-toast-container {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+    
+    .pwa-toast {
+        min-width: auto;
+    }
+    
+    .pwa-debug {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .pwa-banner-content {
+        padding: 12px;
+    }
+    
+    .pwa-banner-text h4 {
+        font-size: 0.875rem;
+    }
+    
+    .pwa-banner-text p {
+        font-size: 0.8125rem;
+    }
+    
+    .pwa-btn {
+        padding: 6px 12px;
+        font-size: 0.8125rem;
+    }
+}
+
+/* === Animation Keyframes === */
+@keyframes slideInUp {
+    from {
+        transform: translateX(-50%) translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutDown {
+    from {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-50%) translateY(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* === High Contrast Mode === */
+@media (prefers-contrast: high) {
+    .pwa-banner {
+        border-width: 2px;
+        background: var(--bg-color);
+        backdrop-filter: none;
+    }
+    
+    .pwa-toast {
+        border-width: 2px;
+        background: var(--bg-color);
+        backdrop-filter: none;
+    }
+    
+    .pwa-btn {
+        border-width: 2px;
+    }
+}
+
+/* === Reduced Motion === */
+@media (prefers-reduced-motion: reduce) {
+    .pwa-banner {
+        transition: opacity 0.2s ease;
+        transform: translateX(-50%) translateY(0);
+    }
+    
+    .pwa-banner.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+    
+    .pwa-toast {
+        transition: opacity 0.2s ease;
+        transform: translateX(0);
+    }
+    
+    .pwa-status-dot {
+        animation: none;
+    }
+}

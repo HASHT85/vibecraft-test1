@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
     <!-- SEO Meta Tags (seront mis à jour dynamiquement) -->
     <meta name="description" content="Portfolio de développeur - Technologies modernes et projets innovants">
     <meta name="keywords" content="développeur, portfolio, web, javascript, frontend, backend, fullstack">
@@ -33,19 +36,22 @@
     <meta name="twitter:creator" content="@portfolio_dev">
     <meta name="twitter:site" content="@portfolio_dev">
     
-    <!-- Additional SEO -->
+    <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#6366f1">
     <meta name="msapplication-TileColor" content="#6366f1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Portfolio">
+    <meta name="mobile-web-app-capable" content="yes">
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://portfolio.dev/">
     
-    <!-- Favicon -->
+    <!-- Favicon and PWA Icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/icon-512x512.png">
     
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,10 +67,7 @@
     <link rel="stylesheet" href="/css/hero-animations.css">
     <link rel="stylesheet" href="/css/about-section.css">
     <link rel="stylesheet" href="/css/contact-form.css">
-    <link rel="stylesheet" href="/css/responsive.css">
-</head>
-<body>
-    <link rel="stylesheet" href="/css/contact-form.css">
+    <link rel="stylesheet" href="/css/pwa.css">
     <link rel="stylesheet" href="/css/responsive.css">
 </head>
 <body>
@@ -193,71 +196,19 @@
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">Projet Demo</h3>
-                        <p class="project-description">Description du projet de démonstration avec animations avancées</p>
+                        <p class="project-description">Description du projet de démonstration avec animations et interactions modernes.</p>
                         <div class="project-tech">
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
                             <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">Vite</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">HTML5</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link animate-hover">Demo</a>
-                            <a href="#" class="project-link animate-hover">Code</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card glass-card animate-on-scroll animate-hover will-animate" data-category="web">
-                    <div class="project-image">
-                        <div class="placeholder-image">⚛️</div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">App React</h3>
-                        <p class="project-description">Application React moderne avec hooks et context</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">TypeScript</span>
-                            <span class="tech-tag">Styled Components</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link animate-hover">Demo</a>
-                            <a href="#" class="project-link animate-hover">Code</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card glass-card animate-on-scroll animate-hover will-animate" data-category="api">
-                    <div class="project-image">
-                        <div class="placeholder-image">🚀</div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">API Node.js</h3>
-                        <p class="project-description">API RESTful avec Express et MongoDB</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Node.js</span>
-                            <span class="tech-tag">Express</span>
-                            <span class="tech-tag">MongoDB</span>
-                            <span class="tech-tag">JWT</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link animate-hover">Demo</a>
-                            <a href="#" class="project-link animate-hover">Code</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card glass-card animate-on-scroll animate-hover will-animate" data-category="mobile">
-                    <div class="project-image">
-                        <div class="placeholder-image">📱</div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">App Mobile</h3>
-                        <p class="project-description">Application mobile native avec React Native</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">React Native</span>
-                            <span class="tech-tag">Redux</span>
-                            <span class="tech-tag">Firebase</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link animate-hover">Demo</a>
-                            <a href="#" class="project-link animate-hover">Code</a>
+                            <a href="#" class="project-link animate-hover">
+                                <span>Voir le projet</span>
+                            </a>
+                            <a href="#" class="project-link animate-hover">
+                                <span>GitHub</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -268,70 +219,24 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">Contactez-moi</h2>
-            <div class="contact-content">
-                <div class="contact-info glass-card animate-on-scroll">
-                    <h3>Discutons de votre projet</h3>
-                    <p>Je suis toujours intéressé par de nouveaux défis et collaborations.</p>
-                    <div class="contact-methods">
-                        <div class="contact-method animate-on-scroll">
-                            <span class="contact-icon">📧</span>
-                            <span>contact@portfolio.com</span>
-                        </div>
-                        <div class="contact-method animate-on-scroll">
-                            <span class="contact-icon">💼</span>
-                            <span>LinkedIn</span>
-                        </div>
-                        <div class="contact-method animate-on-scroll">
-                            <span class="contact-icon">📱</span>
-                            <span>+33 1 23 45 67 89</span>
-                        </div>
-                    </div>
-                </div>
-                <form class="contact-form glass-card animate-on-scroll" id="contact-form" novalidate>
+            <h2 class="section-title animate-on-scroll">Me Contacter</h2>
+            <div class="contact-content glass-card animate-on-scroll">
+                <form class="contact-form" id="contact-form">
                     <div class="form-group">
-                        <label for="name">Nom complet *</label>
-                        <input 
-                            type="text" 
-                            id="name" 
-                            name="name" 
-                            required 
-                            autocomplete="name"
-                            aria-describedby="name-error"
-                            minlength="2"
-                            maxlength="50"
-                            placeholder="Votre nom complet">
+                        <label for="name">Nom</label>
+                        <input type="text" id="name" name="name" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Adresse email *</label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email" 
-                            required 
-                            autocomplete="email"
-                            aria-describedby="email-error"
-                            placeholder="votre@email.com">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="message">Message *</label>
-                        <textarea 
-                            id="message" 
-                            name="message" 
-                            required 
-                            rows="5" 
-                            minlength="10"
-                            maxlength="1000"
-                            placeholder="Décrivez votre projet ou votre demande..."></textarea>
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
                     </div>
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary animate-hover">
-                            <span>Envoyer le message</span>
-                        </button>
-                        <button type="reset" class="btn animate-hover">
-                            <span>Effacer</span>
-                        </button>
-                    </div>
+                    <button type="submit" class="btn btn-primary animate-hover">
+                        <span>Envoyer</span>
+                    </button>
                 </form>
             </div>
         </div>
@@ -340,19 +245,26 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p class="animate-on-scroll">&copy; 2024 Portfolio. Fait avec ❤️ et du code propre.</p>
+            <div class="footer-content">
+                <p>&copy; 2024 Portfolio - Développeur Web. Tous droits réservés.</p>
+                <div class="footer-links">
+                    <a href="#" class="footer-link animate-hover">GitHub</a>
+                    <a href="#" class="footer-link animate-hover">LinkedIn</a>
+                    <a href="#" class="footer-link animate-hover">Twitter</a>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <!-- JavaScript -->
-    <script src="/js/theme-toggle.js"></script>
+    <!-- Scripts -->
     <script src="/js/main.js"></script>
+    <script src="/js/theme-toggle.js"></script>
     <script src="/js/animations.js"></script>
-    <script src="/js/hero-animations.js"></script>
-    <script src="/js/about-section.js"></script>
     <script src="/js/project-filter.js"></script>
     <script src="/js/contact-form.js"></script>
-    <script src="/js/seo-meta.js"></script>
-    <script src="/js/sitemap-generator.js"></script>
+    <script src="/js/about-section.js"></script>
+    <script src="/js/hero-animations.js"></script>
+    <script src="/js/performance-optimizer.js"></script>
+    <script src="/js/pwa.js"></script>
 </body>
 </html>
