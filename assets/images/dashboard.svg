@@ -1,0 +1,21 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="dashGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#43e97b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#38f9d7;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#dashGrad)"/>
+  <circle cx="400" cy="250" r="80" fill="rgba(255,255,255,0.2)"/>
+  <text x="400" y="280" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="60" font-family="Arial">📊</text>
+  <text x="400" y="350" text-anchor="middle" fill="rgba(255,255,255,0.95)" font-size="36" font-weight="bold" font-family="Arial">Dashboard</text>
+  <text x="400" y="420" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="18" font-family="Arial">Analytics • Interactive • Real-time</text>
+  <rect x="250" y="480" width="60" height="25" rx="12" fill="rgba(255,255,255,0.2)"/>
+  <text x="280" y="497" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="14" font-family="Arial">React</text>
+  <rect x="320" y="480" width="70" height="25" rx="12" fill="rgba(255,255,255,0.2)"/>
+  <text x="355" y="497" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="14" font-family="Arial">Chart.js</text>
+  <rect x="400" y="480" width="80" height="25" rx="12" fill="rgba(255,255,255,0.2)"/>
+  <text x="440" y="497" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="14" font-family="Arial">Tailwind</text>
+  <rect x="490" y="480" width="60" height="25" rx="12" fill="rgba(255,255,255,0.2)"/>
+  <text x="520" y="497" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="14" font-family="Arial">D3.js</text>
+</svg>
