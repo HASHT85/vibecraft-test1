@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Theme Toggle - Portfolio</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/theme-enhancements.css">
+    
+    <style>
+        body {
+            font-family: var(--font-family);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 2rem;
+            transition: all 0.3s ease;
+            min-height: 100vh;
+        }
+        
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--glass-shadow);
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .test-section {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+        }
+        
+        .theme-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .info-card {
+            padding: 1rem;
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            border-left: 3px solid var(--text-accent);
+        }
+        
+        .btn {
+            padding: 0.5rem 1rem;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            margin: 0.5rem;
+            transition: transform 0.2s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-accent);
+            border: 1px solid var(--text-accent);
+        }
+        
+        .status {
+            padding: 0.5rem;
+            border-radius: var(--radius-sm);
+            margin: 0.5rem 0;
+            font-family: monospace;
+        }
+        
+        .status.success { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .status.info { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+        .status.warning { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        
+        .color-preview {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .color-swatch {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+            position: relative;
+        }
+        
+        .color-swatch::after {
+            content: attr(data-name);
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <header class="header">
+            <div>
+                <h1>Test Theme Toggle</h1>
+                <p>Testez le système de thème dark/light mode</p>
+            </div>
+            <button class="theme-toggle" aria-label="Basculer le thème">🌙</button>
+        </header>
+        
+        <div class="test-section">
+            <h2>État du Thème</h2>
+            <div class="theme-info">
+                <div class="info-card">
+                    <h3>Thème Actuel</h3>
+                    <div class="status info" id="current-theme">Chargement...</div>
+                </div>
+                <div class="info-card">
+                    <h3>Sauvegarde localStorage</h3>
+                    <div class="status info" id="local-storage">Vérification...</div>
+                </div>
+                <div class="info-card">
+                    <h3>Thème Système</h3>
+                    <div class="status info" id="system-theme">Détection...</div>
+                </div>
+                <div class="info-card">
+                    <h3>Support navigateur</h3>
+                    <div class="status success" id="browser-support">✓ Compatible</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Actions de Test</h2>
+            <button class="btn" onclick="testToggle()">🔄 Toggle Thème</button>
+            <button class="btn" onclick="setLightTheme()">☀️ Force Light</button>
+            <button class="btn" onclick="setDarkTheme()">🌙 Force Dark</button>
+            <button class="btn btn-secondary" onclick="clearLocalStorage()">🗑️ Reset localStorage</button>
+            <button class="btn btn-secondary" onclick="testSystemPreference()">🖥️ Test Système</button>
+            
+            <div id="test-results" style="margin-top: 1rem;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Aperçu des Couleurs</h2>
+            <div class="color-preview">
+                <div class="color-swatch" style="background: var(--bg-primary)" data-name="bg-primary"></div>
+                <div class="color-swatch" style="background: var(--bg-secondary)" data-name="bg-secondary"></div>
+                <div class="color-swatch" style="background: var(--text-primary)" data-name="text-primary"></div>
+                <div class="color-swatch" style="background: var(--text-secondary)" data-name="text-secondary"></div>
+                <div class="color-swatch" style="background: var(--text-accent)" data-name="text-accent"></div>
+                <div class="color-swatch" style="background: var(--glass-bg)" data-name="glass-bg"></div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Événements de Thème</h2>
+            <div id="theme-events" style="max-height: 200px; overflow-y: auto; font-family: monospace; font-size: 0.875rem;"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="js/theme-toggle.js"></script>
+    
+    <script>
+        // Test functions
+        let eventLog = [];
+        
+        function updateStatus() {
+            const currentTheme = document.body.getAttribute('data-theme') || 'light';
+            const savedTheme = localStorage.getItem('portfolio-theme');
+            const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            document.getElementById('current-theme').textContent = currentTheme;
+            document.getElementById('local-storage').textContent = savedTheme || 'Aucune sauvegarde';
+            document.getElementById('system-theme').textContent = systemPrefersDark ? 'dark' : 'light';
+            
+            // Update browser support
+            const hasLocalStorage = typeof Storage !== 'undefined';
+            const hasMatchMedia = window.matchMedia !== undefined;
+            const supportStatus = hasLocalStorage && hasMatchMedia ? '✓ Complet' : '⚠ Partiel';
+            document.getElementById('browser-support').textContent = supportStatus;
+            document.getElementById('browser-support').className = `status ${hasLocalStorage && hasMatchMedia ? 'success' : 'warning'}`;
+        }
+        
+        function logEvent(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            eventLog.unshift(`[${timestamp}] ${message}`);
+            if (eventLog.length > 10) eventLog.pop();
+            
+            const eventContainer = document.getElementById('theme-events');
+            eventContainer.innerHTML = eventLog.map(event => `<div>${event}</div>`).join('');
+        }
+        
+        function showTestResult(message, type = 'info') {
+            const resultsDiv = document.getElementById('test-results');
+            const resultElement = document.createElement('div');
+            resultElement.className = `status ${type}`;
+            resultElement.textContent = message;
+            resultsDiv.appendChild(resultElement);
+            
+            setTimeout(() => {
+                resultElement.remove();
+            }, 3000);
+        }
+        
+        function testToggle() {
+            const beforeTheme = document.body.getAttribute('data-theme') || 'light';
+            document.querySelector('.theme-toggle').click();
+            
+            setTimeout(() => {
+                const afterTheme = document.body.getAttribute('data-theme') || 'light';
+                const success = beforeTheme !== afterTheme;
+                showTestResult(
+                    `Toggle: ${beforeTheme} → ${afterTheme} ${success ? '✓' : '✗'}`,
+                    success ? 'success' : 'warning'
+                );
+                updateStatus();
+            }, 100);
+        }
+        
+        function setLightTheme() {
+            if (window.themeManager) {
+                window.themeManager.setThemeForced('light');
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+                localStorage.setItem('portfolio-theme', 'light');
+            }
+            showTestResult('Force thème clair ☀️', 'success');
+            updateStatus();
+        }
+        
+        function setDarkTheme() {
+            if (window.themeManager) {
+                window.themeManager.setThemeForced('dark');
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('portfolio-theme', 'dark');
+            }
+            showTestResult('Force thème sombre 🌙', 'success');
+            updateStatus();
+        }
+        
+        function clearLocalStorage() {
+            localStorage.removeItem('portfolio-theme');
+            showTestResult('localStorage vidé - redémarrage requis pour voir les changements', 'warning');
+            updateStatus();
+        }
+        
+        function testSystemPreference() {
+            if (window.matchMedia) {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const systemTheme = prefersDark ? 'dark' : 'light';
+                
+                if (window.themeManager) {
+                    window.themeManager.resetToSystemPreference();
+                } else {
+                    document.body.setAttribute('data-theme', systemTheme);
+                }
+                
+                showTestResult(`Appliqué thème système: ${systemTheme}`, 'info');
+                updateStatus();
+            } else {
+                showTestResult('matchMedia non supporté dans ce navigateur', 'warning');
+            }
+        }
+        
+        // Listen for theme changes
+        window.addEventListener('themeChanged', (e) => {
+            logEvent(`Thème changé vers: ${e.detail.theme}`);
+            updateStatus();
+        });
+        
+        // Listen for system theme changes
+        if (window.matchMedia) {
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                logEvent(`Préférence système changée: ${e.matches ? 'dark' : 'light'}`);
+            });
+        }
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStatus();
+            logEvent('Page de test initialisée');
+            
+            // Update every few seconds to catch any changes
+            setInterval(updateStatus, 2000);
+        });
+        
+        // Log localStorage changes
+        const originalSetItem = localStorage.setItem;
+        localStorage.setItem = function(key, value) {
+            if (key === 'portfolio-theme') {
+                logEvent(`localStorage mis à jour: ${key} = ${value}`);
+            }
+            return originalSetItem.apply(this, arguments);
+        };
+    </script>
+</body>
+</html>

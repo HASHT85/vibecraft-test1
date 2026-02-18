@@ -1,0 +1,285 @@
+/* Enhanced Theme Styles and Transitions */
+
+/* Smooth theme transitions for all elements */
+:root {
+  --theme-transition-duration: 0.3s;
+  --theme-transition-timing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Apply transitions to all theme-dependent properties */
+*,
+*::before,
+*::after {
+  transition: 
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing),
+    border-color var(--theme-transition-duration) var(--theme-transition-timing),
+    box-shadow var(--theme-transition-duration) var(--theme-transition-timing),
+    backdrop-filter var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+/* Override for elements that should not have transitions */
+.no-transition,
+.no-transition * {
+  transition: none !important;
+}
+
+/* Enhanced theme toggle button */
+.theme-toggle {
+  position: relative;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.theme-toggle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+
+.theme-toggle:hover::before {
+  transform: translateX(100%);
+}
+
+.theme-toggle:hover {
+  background: var(--bg-secondary);
+  transform: scale(1.05);
+  box-shadow: var(--glass-shadow);
+  border-color: var(--text-accent);
+}
+
+.theme-toggle:focus {
+  outline: 2px solid var(--text-accent);
+  outline-offset: 2px;
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+/* Theme toggle icon animations */
+.theme-toggle-icon {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover .theme-toggle-icon {
+  transform: rotate(15deg) scale(1.1);
+}
+
+/* Dark theme specific enhancements */
+[data-theme="dark"] {
+  /* Enhanced glassmorphism for dark theme */
+  --glass-bg: rgba(15, 23, 42, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .theme-toggle {
+  background: var(--glass-bg);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+  background: rgba(30, 41, 59, 0.8);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Light theme specific enhancements */
+[data-theme="light"] .theme-toggle {
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .theme-toggle:hover {
+  background: rgba(248, 250, 252, 0.95);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Smooth transition state */
+.theme-transitioning {
+  pointer-events: none;
+}
+
+.theme-transitioning * {
+  transition: 
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    backdrop-filter 0.3s ease !important;
+}
+
+/* Theme toggle animations */
+@keyframes themeToggleRotate {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes themeTogglePulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 var(--text-accent);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px transparent;
+  }
+}
+
+.theme-toggle.animating {
+  animation: themeToggleRotate 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.theme-toggle.pulse {
+  animation: themeTogglePulse 0.6s ease-out;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .theme-toggle:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .theme-toggle {
+    border: 2px solid var(--text-primary);
+    background: var(--bg-primary);
+  }
+  
+  .theme-toggle:hover {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+  }
+}
+
+/* Focus visible for better keyboard navigation */
+.theme-toggle:focus-visible {
+  outline: 3px solid var(--text-accent);
+  outline-offset: 2px;
+}
+
+/* Theme change notification (optional) */
+.theme-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  opacity: 0;
+  transform: translateX(100px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.theme-notification.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.theme-notification::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 50%;
+  width: 3px;
+  height: 20px;
+  background: var(--text-accent);
+  transform: translateY(-50%);
+  border-radius: 2px;
+}
+
+/* Enhanced theme variables for better contrast */
+:root {
+  /* Light theme enhancements */
+  --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  --shadow-medium: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  --shadow-heavy: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+[data-theme="dark"] {
+  /* Dark theme enhancements */
+  --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.6);
+  --shadow-medium: 0 3px 6px rgba(0, 0, 0, 0.6), 0 3px 6px rgba(0, 0, 0, 0.7);
+  --shadow-heavy: 0 10px 20px rgba(0, 0, 0, 0.8), 0 6px 6px rgba(0, 0, 0, 0.9);
+}
+
+/* Enhanced glass cards with better theme support */
+.glass-card {
+  transition: all var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+[data-theme="dark"] .glass-card {
+  background: rgba(15, 23, 42, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .glass-card {
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Theme-aware scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-primary);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: rgba(203, 213, 225, 0.3);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(203, 213, 225, 0.5);
+}
