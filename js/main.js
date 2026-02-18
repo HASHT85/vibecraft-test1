@@ -1,3 +1,14 @@
+// CSS imports - Vite will bundle these during build
+import '../css/themes.css'
+import '../css/main.css'
+import '../css/glassmorphism.css'
+import '../css/animations.css'
+import '../css/hero-animations.css'
+import '../css/about-section.css'
+import '../css/contact-form.css'
+import '../css/pwa.css'
+import '../css/responsive.css'
+
 // Main JavaScript - Navigation and Core functionality
 
 document.addEventListener('DOMContentLoaded', function() {

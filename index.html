@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json">
-    
+
     <!-- SEO Meta Tags (seront mis à jour dynamiquement) -->
     <meta name="description" content="Portfolio de développeur - Technologies modernes et projets innovants">
     <meta name="keywords" content="développeur, portfolio, web, javascript, frontend, backend, fullstack">
@@ -14,28 +15,30 @@
     <meta name="robots" content="index, follow">
     <meta name="language" content="French">
     <meta name="revisit-after" content="7 days">
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://portfolio.dev/">
     <meta property="og:title" content="Portfolio - Développeur Web">
-    <meta property="og:description" content="Découvrez mes projets et compétences en développement web moderne. Spécialisé en JavaScript, React, Node.js et technologies cloud.">
+    <meta property="og:description"
+        content="Découvrez mes projets et compétences en développement web moderne. Spécialisé en JavaScript, React, Node.js et technologies cloud.">
     <meta property="og:image" content="https://portfolio.dev/assets/images/og-default.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Portfolio Alexandre Développeur">
     <meta property="og:site_name" content="Portfolio - Développeur Web">
     <meta property="og:locale" content="fr_FR">
-    
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://portfolio.dev/">
     <meta name="twitter:title" content="Portfolio - Développeur Web">
-    <meta name="twitter:description" content="Découvrez mes projets et compétences en développement web moderne. Spécialisé en JavaScript, React, Node.js et technologies cloud.">
+    <meta name="twitter:description"
+        content="Découvrez mes projets et compétences en développement web moderne. Spécialisé en JavaScript, React, Node.js et technologies cloud.">
     <meta name="twitter:image" content="https://portfolio.dev/assets/images/og-default.jpg">
     <meta name="twitter:creator" content="@portfolio_dev">
     <meta name="twitter:site" content="@portfolio_dev">
-    
+
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#6366f1">
     <meta name="msapplication-TileColor" content="#6366f1">
@@ -43,33 +46,25 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Portfolio">
     <meta name="mobile-web-app-capable" content="yes">
-    
+
     <!-- Canonical URL -->
     <link rel="canonical" href="https://portfolio.dev/">
-    
+
     <!-- Favicon and PWA Icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/icon-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/icon-512x512.png">
-    
+
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://api.github.com">
-    
+
     <title>Portfolio - Développeur Web</title>
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="/css/themes.css">
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/glassmorphism.css">
-    <link rel="stylesheet" href="/css/animations.css">
-    <link rel="stylesheet" href="/css/hero-animations.css">
-    <link rel="stylesheet" href="/css/about-section.css">
-    <link rel="stylesheet" href="/css/contact-form.css">
-    <link rel="stylesheet" href="/css/pwa.css">
-    <link rel="stylesheet" href="/css/responsive.css">
+
+    <!-- CSS is imported via main.js for Vite bundling -->
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar">
@@ -96,7 +91,8 @@
     <section id="hero" class="hero">
         <div class="hero-content glass-card">
             <h1 class="hero-title staggered-text">Bonjour, je suis Développeur Full Stack</h1>
-            <p class="hero-description" data-typewriter="Passionné par les technologies web modernes et l'innovation" data-speed="60">Passionné par les technologies web modernes et l'innovation</p>
+            <p class="hero-description" data-typewriter="Passionné par les technologies web modernes et l'innovation"
+                data-speed="60">Passionné par les technologies web modernes et l'innovation</p>
             <div class="hero-actions">
                 <a href="#projects" class="btn btn-primary animate-hover">
                     <span>Voir mes projets</span>
@@ -196,7 +192,8 @@
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">Projet Demo</h3>
-                        <p class="project-description">Description du projet de démonstration avec animations et interactions modernes.</p>
+                        <p class="project-description">Description du projet de démonstration avec animations et
+                            interactions modernes.</p>
                         <div class="project-tech">
                             <span class="tech-tag">JavaScript</span>
                             <span class="tech-tag">CSS3</span>
@@ -267,4 +264,5 @@
     <script type="module" src="/js/performance-optimizer.js"></script>
     <script type="module" src="/js/pwa.js"></script>
 </body>
+
 </html>
