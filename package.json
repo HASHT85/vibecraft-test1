@@ -15,9 +15,11 @@
     "docker:logs": "docker-compose logs -f",
     "docker:clean": "docker system prune -f && docker image prune -f"
   },
-  "devDependencies": {
+  "dependencies": {
     "autoprefixer": "^10.4.24",
-    "postcss": "^8.5.6",
+    "postcss": "^8.5.6"
+  },
+  "devDependencies": {
     "sharp": "^0.34.5",
     "terser": "^5.46.0",
     "vite": "^5.4.21"
