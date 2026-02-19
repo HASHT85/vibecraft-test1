@@ -54,3 +54,18 @@ Les fichiers JSON ou images non importés dans le JS ne sont pas bundlés par d�
 3.  **`performance-optimizer.js`** : Suppression du code qui chargeait manuellement les CSS/JS.
 4.  **`sw.js`** : Réécriture pour être compatible avec les assets hashés de Vite.
 5.  **`Dockerfile`** : Ajout de la copie du dossier `data/` manquant.
+
+## 3. Résolution des Problèmes SSL (Traefik / Let's Encrypt)
+
+Si votre domaine (`portfolio.hach.dev`) est accessible en HTTP mais pas en HTTPS (erreur SSL), voici la méthodologie de diagnostic :
+
+### A. Vérifier les Logs ACME
+Dans Dokploy (ou via `docker logs`), regardez les logs du conteneur **Traefik**. Cherchez "ACME" ou "LetsEncrypt".
+
+*   **Cas 1 : Erreurs visibles (Rate Limit, DNS, etc.)**
+    *   *Rate Limit* : Vous avez demandé trop de certificats. Attendez quelques heures.
+    *   *NXDOMAIN* : Le domaine ne pointe pas vers la bonne IP. Vérifiez vos DNS.
+
+*   **Cas 2 : Le domaine est ABSENT des logs** (Ce qui s'est passé ici)
+    Traefik n'essaie même pas de générer le certificat. Cela signifie qu'il n'a pas pris en compte la configuration.
+    *   **Solution :** Dans Dokploy, **supprimez** le domaine de l'application, sauvegardez, puis **ré-ajoutez** le même domaine (Port 80, HTTPS activé). Cela force Traefik à recharger la configuration ("Hot Reload").
