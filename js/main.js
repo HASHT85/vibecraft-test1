@@ -9,23 +9,33 @@ import '../css/contact-form.css'
 import '../css/pwa.css'
 import '../css/responsive.css'
 
+// JS module imports - Vite will bundle these during build
+import './theme-toggle.js'
+import './animations.js'
+import './project-filter.js'
+import './contact-form.js'
+import './about-section.js'
+import './hero-animations.js'
+import './performance-optimizer.js'
+import './pwa.js'
+
 // Main JavaScript - Navigation and Core functionality
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     console.log('Portfolio initialized');
-    
+
     // Mobile Navigation Toggle
     initMobileNavigation();
-    
+
     // Smooth Scrolling for Navigation Links
     initSmoothScrolling();
-    
+
     // Active Navigation Link Highlighting
     initActiveNavigation();
-    
+
     // Initialize Service Worker for PWA
     initServiceWorker();
-    
+
     // Initialize all modules
     console.log('✅ Main module loaded');
 });
@@ -33,40 +43,40 @@ document.addEventListener('DOMContentLoaded', function() {
 function initMobileNavigation() {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
-    
+
     if (hamburger && navMenu) {
-        hamburger.addEventListener('click', function() {
+        hamburger.addEventListener('click', function () {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
         });
-        
+
         // Close menu when clicking on a link
         const navLinks = document.querySelectorAll('.nav-link');
         navLinks.forEach(link => {
-            link.addEventListener('click', function() {
+            link.addEventListener('click', function () {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
             });
         });
-        
+
         console.log('✅ Mobile navigation initialized');
     }
 }
 
 function initSmoothScrolling() {
     const navLinks = document.querySelectorAll('a[href^="#"]');
-    
+
     navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('click', function (e) {
             e.preventDefault();
-            
+
             const targetId = this.getAttribute('href');
             const targetSection = document.querySelector(targetId);
-            
+
             if (targetSection) {
                 const navbarHeight = document.querySelector('.navbar').offsetHeight;
                 const targetPosition = targetSection.offsetTop - navbarHeight;
-                
+
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
@@ -74,22 +84,22 @@ function initSmoothScrolling() {
             }
         });
     });
-    
+
     console.log('✅ Smooth scrolling initialized');
 }
 
 function initActiveNavigation() {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
-    
+
     function updateActiveLink() {
         const scrollPosition = window.scrollY + 100;
-        
+
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionBottom = sectionTop + section.offsetHeight;
             const sectionId = section.getAttribute('id');
-            
+
             if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
                 navLinks.forEach(link => {
                     link.classList.remove('active');
@@ -100,10 +110,10 @@ function initActiveNavigation() {
             }
         });
     }
-    
+
     window.addEventListener('scroll', updateActiveLink);
     updateActiveLink(); // Initial call
-    
+
     console.log('✅ Active navigation initialized');
 }
 
@@ -115,24 +125,24 @@ async function initServiceWorker() {
         console.log('Service Worker not supported');
         return;
     }
-    
+
     try {
         // Register service worker
         const registration = await navigator.serviceWorker.register('/sw.js', {
             scope: '/'
         });
-        
+
         console.log('✅ Service Worker registered:', registration.scope);
-        
+
         // Handle service worker updates
         registration.addEventListener('updatefound', () => {
             const newWorker = registration.installing;
             console.log('🔄 New Service Worker installing...');
-            
+
             newWorker.addEventListener('statechange', () => {
                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                     console.log('✨ New Service Worker available, update ready');
-                    
+
                     // Dispatch custom event for update notification
                     window.dispatchEvent(new CustomEvent('sw-update-available', {
                         detail: { registration }
@@ -140,17 +150,17 @@ async function initServiceWorker() {
                 }
             });
         });
-        
+
         // Listen for service worker messages
         navigator.serviceWorker.addEventListener('message', (event) => {
             handleServiceWorkerMessage(event.data);
         });
-        
+
         // Check for updates on page focus
         window.addEventListener('focus', () => {
             registration.update();
         });
-        
+
     } catch (error) {
         console.error('Service Worker registration failed:', error);
     }
@@ -161,7 +171,7 @@ async function initServiceWorker() {
  */
 function handleServiceWorkerMessage(data) {
     const { type, payload } = data;
-    
+
     switch (type) {
         case 'CACHE_UPDATED':
             console.log('Cache updated:', payload);
@@ -203,7 +213,7 @@ export function debounce(func, wait) {
 
 export function throttle(func, limit) {
     let inThrottle;
-    return function() {
+    return function () {
         const args = arguments;
         const context = this;
         if (!inThrottle) {
@@ -219,8 +229,8 @@ export function throttle(func, limit) {
  */
 export function isPWA() {
     return window.matchMedia('(display-mode: standalone)').matches ||
-           window.navigator.standalone ||
-           document.referrer.includes('android-app://');
+        window.navigator.standalone ||
+        document.referrer.includes('android-app://');
 }
 
 /**

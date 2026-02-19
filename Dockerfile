@@ -61,6 +61,7 @@ COPY --from=builder /app/sitemap.xml /usr/share/nginx/html/
 COPY --from=builder /app/manifest.json /usr/share/nginx/html/
 COPY --from=builder /app/sw.js /usr/share/nginx/html/
 COPY --from=builder /app/favicon.svg /usr/share/nginx/html/
+COPY --from=builder /app/data /usr/share/nginx/html/data
 
 # Verify files are properly copied
 RUN echo "Production files:" && \
