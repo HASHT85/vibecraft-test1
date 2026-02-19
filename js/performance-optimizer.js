@@ -16,18 +16,16 @@ class PerformanceOptimizer {
             totalSize: 0,
             criticalSize: 0
         };
-        
+
         this.init();
     }
 
     init() {
-        // Initialiser dès que possible
-        this.preloadCriticalResources();
+        // Vite handles all CSS/JS bundling - no manual preloading needed
         this.setupIntersectionObserver();
         this.optimizeImages();
-        this.deferNonCriticalResources();
         this.setupPerformanceMonitoring();
-        
+
         document.addEventListener('DOMContentLoaded', () => {
             this.performanceMetrics.domReady = performance.now();
             this.optimizeDOMInteractions();
@@ -39,91 +37,10 @@ class PerformanceOptimizer {
         });
     }
 
-    /**
-     * Précharge les ressources critiques
-     */
-    preloadCriticalResources() {
-        const criticalResources = [
-            { href: '/css/themes.css', as: 'style' },
-            { href: '/css/main.css', as: 'style' },
-            { href: '/data/profile.json', as: 'fetch', crossorigin: 'anonymous' },
-            { href: '/data/projects.json', as: 'fetch', crossorigin: 'anonymous' }
-        ];
-
-        criticalResources.forEach(resource => {
-            const link = document.createElement('link');
-            link.rel = 'preload';
-            link.href = resource.href;
-            link.as = resource.as;
-            if (resource.crossorigin) link.crossOrigin = resource.crossorigin;
-            
-            document.head.appendChild(link);
-            this.criticalResources.add(resource.href);
-        });
-    }
-
-    /**
-     * Diffère les ressources non-critiques
-     */
-    deferNonCriticalResources() {
-        const nonCriticalCSS = [
-            '/css/glassmorphism.css',
-            '/css/animations.css',
-            '/css/hero-animations.css',
-            '/css/responsive.css'
-        ];
-
-        // Charge CSS non-critique de manière asynchrone
-        nonCriticalCSS.forEach(href => {
-            this.loadCSSAsync(href);
-        });
-
-        // Diffère les scripts non-critiques
-        this.deferScript('/js/animations.js', 'idle');
-        this.deferScript('/js/hero-animations.js', 'visible', '#hero');
-        this.deferScript('/js/about-section.js', 'visible', '#about');
-        this.deferScript('/js/contact-form.js', 'visible', '#contact');
-    }
-
-    /**
-     * Charge CSS de manière asynchrone
-     */
-    loadCSSAsync(href) {
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.as = 'style';
-        link.href = href;
-        link.onload = () => {
-            link.rel = 'stylesheet';
-        };
-        document.head.appendChild(link);
-    }
-
-    /**
-     * Diffère le chargement de scripts
-     */
-    deferScript(src, trigger, selector = null) {
-        if (trigger === 'idle') {
-            this.requestIdleCallback(() => this.loadScript(src));
-        } else if (trigger === 'visible' && selector) {
-            this.observeElement(selector, () => this.loadScript(src));
-        }
-    }
-
-    /**
-     * Charge un script de manière asynchrone
-     */
-    loadScript(src) {
-        if (this.deferredResources.has(src)) return;
-        
-        const script = document.createElement('script');
-        script.src = src;
-        script.type = 'module';
-        script.defer = true;
-        document.head.appendChild(script);
-        
-        this.deferredResources.set(src, script);
-    }
+    // NOTE: preloadCriticalResources, deferNonCriticalResources, loadCSSAsync,
+    // deferScript, and loadScript have been REMOVED because Vite handles all
+    // CSS/JS bundling. Those methods were loading old unbundled paths that
+    // don't exist in the Vite build output (e.g., /css/themes.css, /js/animations.js).
 
     /**
      * Configure l'Intersection Observer pour le lazy loading
@@ -149,7 +66,7 @@ class PerformanceOptimizer {
                     }
                 });
             },
-            { 
+            {
                 rootMargin: '50px',
                 threshold: 0.1
             }
@@ -239,7 +156,7 @@ class PerformanceOptimizer {
         // Débounce/Throttle les événements coûteux
         let scrollTimeout;
         const originalScrollHandler = window.onscroll;
-        
+
         window.onscroll = () => {
             if (scrollTimeout) return;
             scrollTimeout = setTimeout(() => {
@@ -285,10 +202,10 @@ class PerformanceOptimizer {
     setupPerformanceMonitoring() {
         // Web Vitals
         this.measureWebVitals();
-        
+
         // Bundle size tracking
         this.trackBundleSize();
-        
+
         // Resource timing
         this.trackResourceTiming();
     }
@@ -336,10 +253,10 @@ class PerformanceOptimizer {
                         this.performanceMetrics.totalSize += entry.transferSize || entry.encodedBodySize || 0;
                     }
                 }
-                
+
                 if (this.performanceMetrics.totalSize > 0) {
                     console.log('Bundle size:', (this.performanceMetrics.totalSize / 1024).toFixed(2) + 'kb');
-                    
+
                     if (this.performanceMetrics.totalSize > 100000) {
                         console.warn('⚠️ Bundle size exceeds 100kb target');
                     } else {
@@ -357,7 +274,7 @@ class PerformanceOptimizer {
         window.addEventListener('load', () => {
             const entries = performance.getEntriesByType('resource');
             const slowResources = entries.filter(entry => entry.duration > 1000);
-            
+
             if (slowResources.length > 0) {
                 console.warn('Slow resources detected:', slowResources);
             }
@@ -371,22 +288,22 @@ class PerformanceOptimizer {
         const metrics = this.performanceMetrics;
         const domTime = metrics.domReady - metrics.loadStart;
         const loadTime = metrics.loadComplete - metrics.loadStart;
-        
+
         console.log('Performance Analysis:');
         console.log('- DOM Ready:', domTime.toFixed(2) + 'ms');
         console.log('- Load Complete:', loadTime.toFixed(2) + 'ms');
         console.log('- Critical Resources:', this.criticalResources.size);
         console.log('- Deferred Resources:', this.deferredResources.size);
-        
+
         // Recommandations
         if (domTime > 1000) {
             console.warn('⚠️ DOM ready time is slow (>1s)');
         }
-        
+
         if (loadTime > 3000) {
             console.warn('⚠️ Load time is slow (>3s)');
         }
-        
+
         if (domTime < 500 && loadTime < 2000) {
             console.log('✅ Performance targets met!');
         }
